@@ -25,4 +25,6 @@
     <string name="username_editText">\@j.pearson</string>
     <string name="lastname_editText">Pearson</string>
     <string name="firstname_editText">John</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
 </resources>

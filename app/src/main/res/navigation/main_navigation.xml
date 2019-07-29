@@ -9,20 +9,20 @@
               android:name="com.saivo.saivo_recommendo.ui.SplashFragment"
               android:label="fragment_splash"
               tools:layout="@layout/fragment_splash">
-        <action android:id="@+id/nextAction" app:destination="@id/loginFragment"/>
+        <action app:destination="@id/loginFragment" android:id="@+id/to_login_action"/>
     </fragment>
     <fragment android:id="@+id/loginFragment"
               android:name="com.saivo.saivo_recommendo.ui.auth.LoginFragment"
               android:label="fragment_login"
               tools:layout="@layout/fragment_login">
-        <action android:id="@+id/toRegister" app:destination="@id/registerFragment"/>
-        <action android:id="@+id/toMainUI" app:destination="@id/mainFragment"/>
+        <action android:id="@+id/to_register_action" app:destination="@id/registerFragment"/>
+        <action android:id="@+id/login_to_main_action" app:destination="@id/mainFragment"/>
     </fragment>
     <fragment android:id="@+id/registerFragment"
               android:name="com.saivo.saivo_recommendo.ui.auth.RegisterFragment"
               android:label="fragment_register"
               tools:layout="@layout/fragment_register">
-        <action android:id="@+id/nextAction" app:destination="@id/mainFragment"/>
+        <action app:destination="@id/mainFragment" android:id="@+id/register_to_main_action"/>
     </fragment>
     <fragment android:id="@+id/mainFragment"
               android:name="com.saivo.saivo_recommendo.ui.MainUIFragment"
