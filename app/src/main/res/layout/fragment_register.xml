@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   tools:context=".ui.auth.RegisterFragment"
+                                                   android:id="@+id/register_frameLayout">
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/register_email_editText"
+            android:autofillHints="Email" tools:ignore="LabelFor" tools:targetApi="o"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/register_password_editText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:drawableStart="@drawable/ic_email_black"
+            android:drawableLeft="@drawable/ic_email_black"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/register_password_editText"
+            android:autofillHints="Password"
+            tools:ignore="LabelFor"
+            tools:targetApi="o"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/register_register_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:drawableStart="@drawable/ic_lock_black"
+            android:drawableLeft="@drawable/ic_lock_black"/>
+    <Button
+            android:text="@string/register_btnText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/register_register_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="270dp"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/username_editText"
+            app:layout_constraintBottom_toTopOf="@+id/register_email_editText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:hint="@string/username_editText"
+            android:autofillHints="no" tools:targetApi="o"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/lastname_editText"
+            app:layout_constraintBottom_toTopOf="@+id/username_editText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:hint="@string/lastname_editText"
+            android:autofillHints="no" tools:targetApi="o"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/firstname_editText" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/lastname_editText" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="@string/firstname_editText" android:autofillHints="no" tools:targetApi="o"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
