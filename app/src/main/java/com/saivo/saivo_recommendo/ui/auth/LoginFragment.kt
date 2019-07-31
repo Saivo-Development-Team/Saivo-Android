@@ -24,10 +24,13 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         login_register_button.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.to_register_action)
+            Navigation.findNavController(it).navigate(R.id.login_to_register_action)
         }
         login_login_button.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.login_to_main_action)
+            Navigation.findNavController(it).navigate(R.id.login_to_main_ui_action)
+        }
+        login_reset_password_button.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.login_to_reset_password_action)
         }
     }
 }
