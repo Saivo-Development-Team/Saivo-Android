@@ -18,7 +18,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:drawableStart="@drawable/ic_email_black"
-            android:drawableLeft="@drawable/ic_email_black"/>
+    />
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:drawableStart="@drawable/ic_lock_black"
-            android:drawableLeft="@drawable/ic_lock_black"/>
+    />
     <Button
             android:text="@string/register_btnText"
             android:layout_width="wrap_content"
