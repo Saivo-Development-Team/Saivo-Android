@@ -1,11 +1,11 @@
-package com.saivo.saivo_recommendo.ui
+package com.saivo.recommendo.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.saivo.saivo_recommendo.R
+import com.saivo.recommendo.R
 
 
 class MainFragment : Fragment() {

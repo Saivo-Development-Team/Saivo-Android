@@ -1,4 +1,4 @@
-package com.saivo.saivo_recommendo.ui.auth
+package com.saivo.recommendo.ui.auth
 
 
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
-import com.saivo.saivo_recommendo.R
+import com.saivo.recommendo.R
 import kotlinx.android.synthetic.main.fragment_login.*
 
 

@@ -1,4 +1,4 @@
-package com.saivo.saivo_recommendo
+package com.saivo.recommendo
 
 import org.junit.Test
 

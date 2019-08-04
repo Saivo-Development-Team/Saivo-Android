@@ -1,10 +1,7 @@
-package com.saivo.saivo_recommendo
+package com.saivo.recommendo
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.TextView
-import com.saivo.saivo_recommendo.R
 
 class MainActivity : AppCompatActivity() {
 

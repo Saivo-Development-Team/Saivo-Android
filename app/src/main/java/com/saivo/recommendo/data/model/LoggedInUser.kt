@@ -1,4 +1,4 @@
-package com.saivo.saivo_recommendo.data.model
+package com.saivo.recommendo.data.model
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository
