@@ -14,8 +14,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="todo">TODO</string>
     <string name="loading_text">Loading…</string>
@@ -25,6 +23,6 @@
     <string name="username_editText">\@j.pearson</string>
     <string name="lastname_editText">Pearson</string>
     <string name="firstname_editText">John</string>
-    <string name="hint_email">Email</string>
+    <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
 </resources>

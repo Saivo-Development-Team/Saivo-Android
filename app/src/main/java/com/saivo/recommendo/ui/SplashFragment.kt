@@ -27,7 +27,7 @@ class SplashFragment : Fragment() {
 
         val timer = Timer("schedule", true)
 
-        timer.schedule(6000) {
+        timer.schedule(2000) {
             Navigation.findNavController(view).navigate(R.id.to_login_action)
         }
 
