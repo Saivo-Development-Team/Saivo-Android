@@ -1,31 +1,27 @@
 package com.saivo.recommendo.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.saivo.recommendo.data.model.ClientAccessToken
-import com.saivo.recommendo.data.model.User
-import com.saivo.recommendo.network.resquest.ApiUserService
-import kotlinx.coroutines.Deferred
+import com.saivo.recommendo.util.network.Connectivity
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.*
+import retrofit2.create
 
-const val BASE_URL = "https://saivo-recommendo.herokuapp.com/api/"
+/*
+* TODO:  - Find a better way to store this info
+*        - AUTHORIZATION_TOKEN expires, prevent HttpException: 401, 500 etc..
+*        - BASE_URL has to run on SSL
+* */
+const val BASE_URL = "http://10.0.2.2:8080/api/"
 const val AUTHORIZATION_TYPE = "Bearer"
-const val AUTHORIZATION_TOKEN = "e986fb0d-6775-4e86-ae2b-fc34e4cd8266"
+const val AUTHORIZATION_TOKEN = "eab7c1c6-bc15-4231-9edd-4f7cff4e8b17"
 const val AUTHORIZATION_HEADER = "$AUTHORIZATION_TYPE $AUTHORIZATION_TOKEN"
 
-interface ApiService {
-
-    @POST("/api/users")
-    fun registerUserAsync(@Body user: User): Deferred<String>
-
-    @GET("/api/users")
-    fun getUsersAsync(): Deferred<List<User>>
+interface Service {
 
     companion object {
-        operator fun invoke(): ApiService {
+        operator fun invoke(connectivity: Connectivity): Retrofit {
             val interceptor = Interceptor {
                 val url = it.request().url().newBuilder().build()
                 val request = it.request().newBuilder().url(url)
@@ -34,12 +30,15 @@ interface ApiService {
                 return@Interceptor it.proceed(request)
             }
 
-            val httpClient = OkHttpClient.Builder().addInterceptor(interceptor).build()
+            val httpClient = OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                .addInterceptor(connectivity)
+                .build()
 
             return Retrofit.Builder().client(httpClient).baseUrl(BASE_URL)
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .addConverterFactory(GsonConverterFactory.create())
-                .build().create(ApiService::class.java)
+                .build()
         }
     }
 }

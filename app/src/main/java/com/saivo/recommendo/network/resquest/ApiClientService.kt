@@ -1,6 +1,6 @@
 package com.saivo.recommendo.network.resquest
 
-import com.saivo.recommendo.data.model.ClientAccessToken
+import com.saivo.recommendo.data.model.infrastructure.ClientAccessToken
 import kotlinx.coroutines.Deferred
 import retrofit2.http.Header
 import retrofit2.http.POST
