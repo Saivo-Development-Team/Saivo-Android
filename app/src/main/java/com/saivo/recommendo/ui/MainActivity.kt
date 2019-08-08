@@ -1,7 +1,8 @@
-package com.saivo.recommendo
+package com.saivo.recommendo.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.saivo.recommendo.R
 
 class MainActivity : AppCompatActivity() {
 

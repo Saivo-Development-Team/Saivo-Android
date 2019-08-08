@@ -1,21 +1,23 @@
 package com.saivo.recommendo.ui.auth
 
 
-import android.graphics.Color
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
-import at.favre.lib.crypto.bcrypt.BCrypt
-import at.favre.lib.crypto.bcrypt.BCryptParser
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import com.saivo.recommendo.R
-import com.saivo.recommendo.data.model.User
-import com.saivo.recommendo.network.ApiService
+import com.saivo.recommendo.actions.UserAction
+import com.saivo.recommendo.data.model.domain.User
+import com.saivo.recommendo.data.objects.Login
+import com.saivo.recommendo.network.access.DataSource
+import com.saivo.recommendo.util.helpers.Display
 import kotlinx.android.synthetic.main.fragment_login.*
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
@@ -31,36 +33,37 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val userService = ApiService()
-        var users: List<User>
 
+        var user: User? = null
+        val dataSource = DataSource(this.context!!)
 
-
-        login_register_button.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.login_to_register_action)
-        }
         login_login_button.setOnClickListener {
-            var user: User? = null
-            CoroutineScope(context = Dispatchers.IO).launch {
-                users = userService.getUsersAsync().await()
-                println("Debug: $users\n\n")
-               user = users.find {
-                    user -> user.username == login_username_editText.text.toString() &&
-                        BCrypt.verifyer().verify(
-                            login_password_editText.text.toString().toByteArray(),
-                            user.password.toByteArray()
-                        ).verified
-               }
-                if (user == null) {
-                    login_username_editText.setBackgroundColor(Color.RED)
-                    login_password_editText.setBackgroundColor(Color.RED)
-                } else {
-                    Navigation.findNavController(it).navigate(R.id.login_to_main_ui_action)
+            // TODO - Abstract all the code
+            //      - Use helper functions
+            val login = Login(
+                password = login_password_editText.text.toString(),
+               username = login_username_editText.text.toString()
+            )
+            when {
+                // TODO - Better validation is required
+                login.username.isEmpty() -> {
+                    Display.toastMessage(this@LoginFragment.context, "Username is Empty!", 1)
+                }
+                login.password.isEmpty() -> {
+                    Display.toastMessage(this@LoginFragment.context, "Password is Empty!", 1)
+                }
+                login.username.isNotEmpty() && login.password.isNotEmpty() -> {
+                    GlobalScope.launch(Dispatchers.Main) {
+                        Display.toastMessage(this@LoginFragment.context, "Logging You In ")
+                        dataSource.loginUserAsync(login).run {
+                            dataSource.userData.observe(this@LoginFragment, Observer {
+                                user = it
+                            })
+                            UserAction.login(this@LoginFragment.view!!)
+                        }
+                    }
                 }
             }
-        }
-        login_reset_password_button.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.login_to_reset_password_action)
         }
     }
 }
