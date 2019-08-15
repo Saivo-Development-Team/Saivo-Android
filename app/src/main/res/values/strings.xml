@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Saivo Recommendo</string>
-    <!-- Strings related to login -->
+    <string name="app_name">Recommendo</string>
+    <!-- Strings related to userLoggedIn -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -25,4 +25,17 @@
     <string name="firstname_editText">John</string>
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
+
+    <string name="firstname">Firstname</string>
+    <string name="lastname">Lastname</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="reset_password">Forgot Password?</string>
+    <string name="change_password">Change Password</string>
+    <string name="enter_your_account_email">Enter your Account Email</string>
+    <string name="enter_pin">Enter Pin</string>
+    <string name="new_password">New Password</string>
+    <string name="profile_image">Profile Image</string>
 </resources>
