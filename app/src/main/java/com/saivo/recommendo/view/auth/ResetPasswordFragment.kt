@@ -1,4 +1,4 @@
-package com.saivo.recommendo.ui.auth
+package com.saivo.recommendo.view.auth
 
 
 import android.os.Bundle
