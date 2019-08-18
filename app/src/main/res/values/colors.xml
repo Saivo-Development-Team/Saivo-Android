@@ -9,4 +9,5 @@
     <color name="transparentGray">#59EBEBEB</color>
     <color name="startOfGradient">#E50585D5</color>
     <color name="endOfGradient">#005F5F</color>
+    <color name="lightGreen">#5964FFE1</color>
 </resources>

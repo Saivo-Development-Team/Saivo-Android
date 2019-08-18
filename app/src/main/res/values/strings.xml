@@ -38,4 +38,9 @@
     <string name="enter_pin">Enter Pin</string>
     <string name="new_password">New Password</string>
     <string name="profile_image">Profile Image</string>
+    <string name="user_name">User Name</string>
+    <string name="email_error">Email Error</string>
+    <string name="password_error">Password Error</string>
+    <string name="firstname_error">Firstname Error</string>
+    <string name="lastname_error">Lastname Error</string>
 </resources>
