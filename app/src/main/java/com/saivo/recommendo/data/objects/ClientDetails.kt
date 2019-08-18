@@ -1,6 +1,6 @@
 package com.saivo.recommendo.data.objects
 
-data class Client(
+data class ClientDetails(
     val accessTokenValidity: Int,
     val authorizedGrantTypes: String ,
     val clientId: String ,

@@ -1,8 +1,7 @@
 package com.saivo.recommendo.data.objects
 
-data class Register (
+data class RegisterCredentials (
     val email: String,
-    val username: String,
     val password: String,
     val lastname: String,
     val firstname: String

@@ -1,6 +1,6 @@
 package com.saivo.recommendo.data.objects
 
-data class Login(
-    val username: String,
+data class LoginCredentials(
+    val email: String,
     val password: String
 )
