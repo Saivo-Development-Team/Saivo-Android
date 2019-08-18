@@ -1,4 +1,4 @@
-package com.saivo.recommendo.ui
+package com.saivo.recommendo.view.main
 
 
 import android.os.Bundle
