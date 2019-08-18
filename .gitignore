@@ -1,19 +1,12 @@
 *.iml
 .gradle
 /local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
-/build
 /captures
 .externalNativeBuild
 
 HELP.md
-.gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**
@@ -31,9 +24,7 @@ build/
 ### IntelliJ IDEA ###
 .idea
 *.iws
-*.iml
 *.ipr
-out/
 
 ### NetBeans ###
 /nbproject/private/
@@ -44,3 +35,5 @@ out/
 
 ### VS Code ###
 .vscode/
+libs/
+schemas/
