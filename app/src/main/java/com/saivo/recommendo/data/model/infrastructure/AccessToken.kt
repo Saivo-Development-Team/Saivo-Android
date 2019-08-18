@@ -1,10 +1,10 @@
-package com.saivo.recommendo.data.model
+package com.saivo.recommendo.data.model.infrastructure
 
 import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
 @Entity
-data class ClientAccessToken(
+data class AccessToken(
     @SerializedName("access_token")
     val accessToken: String,
     @SerializedName("expires_in")
