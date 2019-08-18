@@ -1,6 +1,13 @@
 package com.saivo.recommendo.data.model.domain
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity(tableName = "rating")
 data class Rating(
-    val id: String = ""
+    @PrimaryKey(autoGenerate = false)
+    val id: String,
+    val stars: Int,
+    val comment: String,
+    val written: String
 )
