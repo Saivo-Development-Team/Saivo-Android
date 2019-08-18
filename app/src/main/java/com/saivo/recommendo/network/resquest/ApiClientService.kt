@@ -1,6 +1,6 @@
 package com.saivo.recommendo.network.resquest
 
-import com.saivo.recommendo.data.model.infrastructure.ClientAccessToken
+import com.saivo.recommendo.data.model.infrastructure.AccessToken
 import kotlinx.coroutines.Deferred
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -10,11 +10,11 @@ interface ApiClientService {
 
     @POST("/oauth/token")
     fun getClientAccessToken(
-        @Query("username") username: String,
+        @Query("email") email: String,
         @Query("password") password: String,
         @Query("grant_type") grant_type: String,
         @Header("Authorization") authentication: String
-    ) : Deferred<ClientAccessToken>
+    ) : Deferred<AccessToken>
 
     @POST("/register/client")
     fun registerClient()
