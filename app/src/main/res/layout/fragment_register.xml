@@ -12,8 +12,19 @@
             android:layout_height="wrap_content"
             tools:context=".view.auth.RegisterFragment"
     >
-        <EditText
+        <TextView
+                app:layout_constraintVertical_chainStyle="packed"
                 app:layout_constraintVertical_bias="0.45"
+                android:id="@+id/login_firstname_error_text"
+                android:text="@string/firstname_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="@+id/GuidelineRight"
+                app:layout_constraintLeft_toLeftOf="@+id/GuidelineLeft"
+                app:layout_constraintBottom_toTopOf="@+id/register_firstname_editText"
+                app:layout_constraintHorizontal_bias="0.035" android:visibility="gone"/>
+        <EditText
                 android:id="@+id/register_firstname_editText"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
@@ -24,18 +35,27 @@
                 android:background="@drawable/edit_text_background"
                 android:inputType="textPersonName"
                 android:hint="@string/firstname"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/login_firstname_error_text"
                 app:layout_constraintRight_toRightOf="@+id/GuidelineRight"
                 app:layout_constraintLeft_toLeftOf="@+id/GuidelineLeft"
-                app:layout_constraintBottom_toTopOf="@+id/register_lastname_editText"
+                app:layout_constraintBottom_toTopOf="@+id/login_lastname_error_text"
                 android:ems="10"
                 android:layout_marginTop="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
-                app:layout_constraintVertical_chainStyle="packed"
                 android:autofillHints="false" tools:targetApi="o"
         />
+        <TextView
+                android:id="@+id/login_lastname_error_text"
+                android:text="@string/lastname_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/register_firstname_editText"
+                app:layout_constraintRight_toRightOf="@+id/GuidelineRight"
+                app:layout_constraintLeft_toLeftOf="@+id/GuidelineLeft"
+                app:layout_constraintBottom_toTopOf="@+id/register_lastname_editText"
+                app:layout_constraintHorizontal_bias="0.035" android:visibility="gone"/>
         <EditText
                 android:id="@+id/register_lastname_editText"
                 android:layout_width="0dp"
@@ -47,10 +67,10 @@
                 android:background="@drawable/edit_text_background"
                 android:inputType="textPersonName"
                 android:hint="@string/lastname"
-                app:layout_constraintTop_toBottomOf="@+id/register_firstname_editText"
+                app:layout_constraintTop_toBottomOf="@+id/login_lastname_error_text"
                 app:layout_constraintRight_toRightOf="@+id/GuidelineRight"
                 app:layout_constraintLeft_toLeftOf="@+id/GuidelineLeft"
-                app:layout_constraintBottom_toTopOf="@+id/register_email_editText"
+                app:layout_constraintBottom_toTopOf="@+id/login_email_error_text"
                 android:ems="10"
                 android:layout_marginTop="8dp"
                 android:layout_marginLeft="8dp"
@@ -58,6 +78,16 @@
                 android:layout_marginRight="8dp"
                 android:autofillHints="false" tools:targetApi="o"
         />
+        <TextView
+                android:id="@+id/login_email_error_text"
+                android:text="@string/email_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/register_lastname_editText"
+                app:layout_constraintRight_toRightOf="@+id/GuidelineRight"
+                app:layout_constraintLeft_toLeftOf="@+id/GuidelineLeft"
+                app:layout_constraintBottom_toTopOf="@+id/register_email_editText"
+                app:layout_constraintHorizontal_bias="0.035" android:visibility="gone"/>
         <EditText
                 android:id="@+id/register_email_editText"
                 android:layout_width="0dp"
@@ -69,10 +99,10 @@
                 android:background="@drawable/edit_text_background"
                 android:inputType="textEmailAddress"
                 android:hint="@string/email"
-                app:layout_constraintTop_toBottomOf="@+id/register_lastname_editText"
+                app:layout_constraintTop_toBottomOf="@+id/login_email_error_text"
                 app:layout_constraintRight_toRightOf="@+id/GuidelineRight"
                 app:layout_constraintLeft_toLeftOf="@+id/GuidelineLeft"
-                app:layout_constraintBottom_toTopOf="@+id/register_password_editText"
+                app:layout_constraintBottom_toTopOf="@+id/login_password_error_text"
                 android:ems="10"
                 android:layout_marginTop="8dp"
                 android:layout_marginLeft="8dp"
@@ -81,6 +111,16 @@
                 android:drawableEnd="@drawable/ic_email"
                 android:autofillHints="false" tools:targetApi="o"
         />
+        <TextView
+                android:id="@+id/login_password_error_text"
+                android:text="@string/password_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/register_email_editText"
+                app:layout_constraintRight_toRightOf="@+id/GuidelineRight"
+                app:layout_constraintLeft_toLeftOf="@+id/GuidelineLeft"
+                app:layout_constraintBottom_toTopOf="@+id/register_password_editText"
+                app:layout_constraintHorizontal_bias="0.035" android:visibility="gone"/>
         <EditText
                 android:id="@+id/register_password_editText"
                 android:layout_width="0dp"
@@ -93,7 +133,7 @@
                 android:background="@drawable/edit_text_background"
                 android:inputType="textPassword"
                 android:hint="@string/password"
-                app:layout_constraintTop_toBottomOf="@+id/register_email_editText"
+                app:layout_constraintTop_toBottomOf="@+id/login_password_error_text"
                 app:layout_constraintRight_toRightOf="@+id/GuidelineRight"
                 app:layout_constraintLeft_toLeftOf="@+id/GuidelineLeft"
                 app:layout_constraintBottom_toTopOf="@+id/register_register_button"
