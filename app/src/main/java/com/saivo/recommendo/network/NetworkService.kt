@@ -1,10 +1,7 @@
 package com.saivo.recommendo.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.saivo.recommendo.util.AUTHORIZATION_TOKEN
-import com.saivo.recommendo.util.AUTHORIZATION_TYPE
-import com.saivo.recommendo.util.DEVELOPMENT_URL
-import com.saivo.recommendo.util.DEVELOPMENT_URL_WIFI
+import com.saivo.recommendo.util.*
 import com.saivo.recommendo.util.network.Connectivity
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -36,7 +33,7 @@ interface NetworkService {
                 .addInterceptor(connectivity)
                 .build()
 
-            return Retrofit.Builder().client(httpClient).baseUrl(DEVELOPMENT_URL_WIFI)
+            return Retrofit.Builder().client(httpClient).baseUrl(STAGGIN_URL)
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

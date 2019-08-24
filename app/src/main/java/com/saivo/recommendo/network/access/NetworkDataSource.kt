@@ -12,11 +12,12 @@ import com.saivo.recommendo.network.NetworkService
 import com.saivo.recommendo.network.resquest.ApiUserService
 import com.saivo.recommendo.util.network.Connection
 import retrofit2.HttpException
+import retrofit2.create
 
 class NetworkDataSource(
+    private val networkService: NetworkService.Companion,
     private val context: Context
 ) : DataSource {
-
     private val currentUserData = MutableLiveData<UserData>()
 
     override val userData: LiveData<UserData>
@@ -24,8 +25,8 @@ class NetworkDataSource(
 
     override suspend fun getUserDataAsync(Id: String): Response? {
         try {
-            return NetworkService.invoke(Connection(context))
-                .create(ApiUserService::class.java)
+            return networkService.invoke(Connection(context))
+                .create<ApiUserService>()
                 .getUserDataAsync(Id).await()
         } catch (e: HttpException) {
             Log.e("Network", e.message())
@@ -35,11 +36,11 @@ class NetworkDataSource(
 
     override suspend fun loginUserAsync(loginCredentials: LoginCredentials): Response? {
         try {
-            val response = NetworkService.invoke(Connection(context))
-                .create(ApiUserService::class.java)
+            val response = networkService.invoke(Connection(context))
+                .create<ApiUserService>()
                 .loginUserAsync(loginCredentials).await()
             if (response.data != null) {
-                currentUserData.value = response.getObjectFromData(UserData::class.java)
+                currentUserData.postValue(response.getObjectFromData(UserData::class.java))
             }
             return response
         } catch (e: HttpException) { // TODO - Try to catch this sooner with Connectivity: Interceptor

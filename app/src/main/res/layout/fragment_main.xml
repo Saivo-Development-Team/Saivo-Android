@@ -28,7 +28,9 @@
                 mapbox:mapbox_cameraTargetLat="40.73581"
                 mapbox:mapbox_cameraTargetLng="-73.99155"
                 mapbox:mapbox_cameraZoom="11"
-                android:layout_alignStart="@+id/MainViewCoordinatorLayout"/>
+                android:layout_alignStart="@+id/MainViewCoordinatorLayout"
+                android:elevation="0dp"
+        />
 
         <androidx.core.widget.NestedScrollView
                 android:background="@drawable/background"
@@ -37,13 +39,16 @@
                 android:fillViewport="true"
                 app:behavior_peekHeight="120dp"
                 app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        />
+                android:elevation="15dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+        </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:layout_width="match_parent"
             app:menu="@menu/bottom_nav_menu"
-            android:layout_height="wrap_content"
+            android:elevation="20dp"
             android:id="@+id/MainBottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/lightGreen"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"

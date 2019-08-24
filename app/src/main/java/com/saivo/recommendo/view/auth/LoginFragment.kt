@@ -9,17 +9,19 @@ import androidx.navigation.Navigation
 import com.saivo.recommendo.R
 import com.saivo.recommendo.actions.UserAction
 import com.saivo.recommendo.data.objects.LoginCredentials
-import com.saivo.recommendo.network.access.NetworkDataSource
+import com.saivo.recommendo.network.access.DataSource
 import com.saivo.recommendo.view.main.CoroutineFragment
 import com.saivo.recommendo.util.helpers.Display
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
 
 class LoginFragment : CoroutineFragment(), KodeinAware {
     override val kodein by closestKodein()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +33,7 @@ class LoginFragment : CoroutineFragment(), KodeinAware {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val dataSource = NetworkDataSource(this.context!!)
+        val dataSource: DataSource by instance()
 
         login_button.setOnClickListener {
             // TODO - Abstract all the code
@@ -51,7 +53,6 @@ class LoginFragment : CoroutineFragment(), KodeinAware {
                 }
                 credentials.email.isNotEmpty() && credentials.password.isNotEmpty() -> {
                     launch {
-
                         val r = with(dataSource) { loginUserAsync(credentials) }
                         if(r != null) {
                             when{

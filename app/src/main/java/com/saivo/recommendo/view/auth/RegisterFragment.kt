@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import com.saivo.recommendo.R
 import com.saivo.recommendo.actions.UserAction
 import com.saivo.recommendo.data.objects.RegisterCredentials
-import com.saivo.recommendo.network.access.NetworkDataSource
+import com.saivo.recommendo.network.access.DataSource
 import com.saivo.recommendo.util.helpers.Display
 import com.saivo.recommendo.view.main.CoroutineFragment
 import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
 
 class RegisterFragment : CoroutineFragment(), KodeinAware {
@@ -29,7 +30,7 @@ class RegisterFragment : CoroutineFragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val dataSource = NetworkDataSource(this.context!!)
+        val dataSource: DataSource by instance()
 
         register_register_button.setOnClickListener {
             val credentials = RegisterCredentials(

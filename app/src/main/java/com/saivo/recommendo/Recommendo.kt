@@ -29,8 +29,8 @@ class Recommendo : Application(), KodeinAware {
         bind() from singleton { instance<Database>().userDao() }
         bind() from singleton { instance<Database>().clientDao() }
         bind<Connectivity>() with singleton { Connection(instance()) }
-        bind() from singleton { NetworkService(instance()) }
-        bind<DataSource>() with singleton { NetworkDataSource(instance()) }
+        bind<NetworkService.Companion>() with singleton { NetworkService.Companion }
+        bind<DataSource>() with singleton { NetworkDataSource(instance(), instance()) }
         bind<UserRepository>() with singleton { UserRepositoryImpl(instance(), instance()) }
         bind() from provider { UserViewModelFactory(instance()) }
     }

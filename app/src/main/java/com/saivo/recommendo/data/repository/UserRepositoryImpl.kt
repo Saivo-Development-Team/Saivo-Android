@@ -6,6 +6,8 @@ import com.saivo.recommendo.data.model.domain.User
 import com.saivo.recommendo.data.model.infrastructure.UserData
 import com.saivo.recommendo.network.access.DataSource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.threeten.bp.ZonedDateTime
 
@@ -15,9 +17,11 @@ class UserRepositoryImpl(
 ) : UserRepository {
 
     init {
-        dataSource.userData.observeForever {
-            userData -> run {
-                storeUserData(userData)
+        dataSource.userData.observeForever { userData ->
+            run {
+                GlobalScope.launch(Dispatchers.IO) {
+                    storeUserData(userData)
+                }
             }
         }
     }
@@ -29,17 +33,19 @@ class UserRepositoryImpl(
         }
     }
 
-    private fun storeUserData(userData: UserData){
+    private suspend fun storeUserData(userData: UserData) {
+        return withContext(Dispatchers.IO) {
             userDao.updateUserData(userData.getUserDetailsFromData())
-    }
-
-    private fun onStartup(){
-        if (updatedDataNeeded(ZonedDateTime.now().minusHours(1))){
-                fetchUserData()
         }
     }
 
-    private fun fetchUserData(){
+    private fun onStartup() {
+        if (updatedDataNeeded(ZonedDateTime.now().minusHours(1))) {
+            fetchUserData()
+        }
+    }
+
+    private fun fetchUserData() {
         dataSource.userData.value
     }
 
