@@ -1,11 +1,7 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
-apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'kotlin-kapt'
-
+apply plugin: 'kotlin-android-extensions'
 apply plugin: "androidx.navigation.safeargs"
 
 android {
@@ -24,6 +20,11 @@ android {
             }
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -113,4 +114,5 @@ dependencies {
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 
     kapt "androidx.room:room-compiler:$room_version"
+//    kapt 'com.android.databinding:compiler:3.1.4'
 }
