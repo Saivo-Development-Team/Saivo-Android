@@ -1,11 +1,11 @@
 package com.saivo.recommendo.data.objects
 
 data class ClientDetails(
-    val accessTokenValidity: Int,
-    val authorizedGrantTypes: String ,
+    val scope: String,
     val clientId: String ,
-    val clientSecret: String,
-    val refreshTokenValidity: Int,
     val resourceIds: String,
-    val scope: String 
+    val clientSecret: String,
+    val accessTokenValidity: Int,
+    val refreshTokenValidity: Int,
+    val authorizedGrantTypes: String
 )

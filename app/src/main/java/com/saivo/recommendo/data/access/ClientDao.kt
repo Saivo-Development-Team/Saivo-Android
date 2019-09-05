@@ -5,18 +5,15 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.saivo.recommendo.data.model.infrastructure.AccessToken
 import com.saivo.recommendo.data.model.infrastructure.Client
 
 @Dao
 interface ClientDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addOrReplace(client: Client)
+    fun updateClientCredentials(client: Client)
 
-    @Query("select * from client where clientId = :clientId")
-    fun getClient(clientId : String): LiveData<Client>
-//
-//    fun getClientToken(): LiveData<AccessToken>
+    @Query("select * from client where deviceClient = 0")
+    fun getClientCredentials(): LiveData<Client>
 
 }
