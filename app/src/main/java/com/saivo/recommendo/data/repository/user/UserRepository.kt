@@ -1,23 +1,23 @@
-package com.saivo.recommendo.data.repository
+package com.saivo.recommendo.data.repository.user
 
 import androidx.lifecycle.LiveData
 import com.saivo.recommendo.data.access.UserDao
 import com.saivo.recommendo.data.model.domain.User
 import com.saivo.recommendo.data.model.infrastructure.UserData
-import com.saivo.recommendo.network.access.DataSource
+import com.saivo.recommendo.network.access.user.IUserDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.threeten.bp.ZonedDateTime
 
-class UserRepositoryImpl(
+class UserRepository(
     private val userDao: UserDao,
-    private val dataSource: DataSource
-) : UserRepository {
+    private val userDataSource: IUserDataSource
+) : IUserRepository {
 
     init {
-        dataSource.userData.observeForever { userData ->
+        userDataSource.userData.observeForever { userData ->
             run {
                 GlobalScope.launch(Dispatchers.IO) {
                     storeUserData(userData)
@@ -29,12 +29,12 @@ class UserRepositoryImpl(
     override suspend fun getUserData(): LiveData<User> {
         return withContext(Dispatchers.IO) {
             onStartup()
-            return@withContext userDao.getUserData("33d43e0c-3c53-4cac-addb-3245b53fe54a")
+            return@withContext userDao.getUserData(userDataSource.userData.value!!.email)
         }
     }
 
     private suspend fun storeUserData(userData: UserData) {
-        return withContext(Dispatchers.IO) {
+        withContext(Dispatchers.IO) {
             userDao.updateUserData(userData.getUserDetailsFromData())
         }
     }
@@ -46,7 +46,7 @@ class UserRepositoryImpl(
     }
 
     private fun fetchUserData() {
-        dataSource.userData.value
+        userDataSource.userData.value
     }
 
     private fun updatedDataNeeded(lastUpdateTime: ZonedDateTime): Boolean {
