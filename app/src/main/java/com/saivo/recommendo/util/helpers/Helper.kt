@@ -9,3 +9,7 @@ fun <T> lazyLoad(func: suspend CoroutineScope.() -> T): Lazy<Deferred<T>>{
         }
     }
 }
+
+fun makeString(any: Any): String {
+    return any.toString().trim()
+}
