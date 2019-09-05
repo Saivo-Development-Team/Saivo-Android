@@ -26,8 +26,6 @@
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
 
-    <string name="firstname">Firstname</string>
-    <string name="lastname">Lastname</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="register">Register</string>
@@ -39,8 +37,17 @@
     <string name="new_password">New Password</string>
     <string name="profile_image">Profile Image</string>
     <string name="user_name">User Name</string>
+
     <string name="email_error">Email Error</string>
     <string name="password_error">Password Error</string>
     <string name="firstname_error">Firstname Error</string>
     <string name="lastname_error">Lastname Error</string>
+
+    <string name="firstname">Firstname</string>
+    <string name="lastname">Lastname</string>
+    <string name="preferences_text">Preferences</string>
+    <string name="settings_text">Settings</string>
+    <string name="notifications_text">Notifications</string>
+    <string name="dashboard_text">Dashboard</string>
+    <string name="mapview_text">MapView</string>
 </resources>
