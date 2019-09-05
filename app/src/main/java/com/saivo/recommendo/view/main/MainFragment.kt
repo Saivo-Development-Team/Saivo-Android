@@ -6,13 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.maps.MapView
-import com.saivo.recommendo.R
 import com.mapbox.mapboxsdk.maps.Style
+import com.saivo.recommendo.R
 import com.saivo.recommendo.util.MAPBOX_KEY
-import com.saivo.recommendo.view.viewmodel.UserViewModel
-import com.saivo.recommendo.view.viewmodel.UserViewModelFactory
+import com.saivo.recommendo.view.viewable.user.UserViewModel
+import com.saivo.recommendo.view.viewable.user.UserViewModelFactory
+import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -24,7 +26,8 @@ class MainFragment : CoroutineFragment(), KodeinAware {
     private val userViewModelFactory: UserViewModelFactory by instance()
     private lateinit var userViewModel: UserViewModel
 
-    private var mapView: MapView? = null
+//    private var mapView: MapView? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,10 +38,17 @@ class MainFragment : CoroutineFragment(), KodeinAware {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userViewModel = ViewModelProvider(this@MainFragment, userViewModelFactory).get(UserViewModel::class.java)
-        mapView = view.findViewById(R.id.MainMapView)
-        mapView!!.onCreate(savedInstanceState)
-        mapView!!.getMapAsync { mapboxMap -> mapboxMap.setStyle(Style.MAPBOX_STREETS) }
+        activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)?.visibility =
+            View.VISIBLE
+
+//        mapView = view.findViewById(R.id.MainMapView)
+//        mapView!!.onCreate(savedInstanceState)
+//        mapView!!.getMapAsync { mapboxMap -> mapboxMap.setStyle(Style.MAPBOX_STREETS) }
+
+        userViewModel = ViewModelProvider(
+            this@MainFragment,
+            userViewModelFactory
+        ).get(UserViewModel::class.java)
         loadUserData()
     }
 
@@ -46,7 +56,9 @@ class MainFragment : CoroutineFragment(), KodeinAware {
         val userData = userViewModel.userData.await()
         userData.observe(this@MainFragment, Observer {
             if (it == null) return@Observer
-//            user_name_text.text = it.email
+            firstname_text_view.text = it.firstname
+            lastname_text_view.text = it.lastname
         })
     }
+
 }

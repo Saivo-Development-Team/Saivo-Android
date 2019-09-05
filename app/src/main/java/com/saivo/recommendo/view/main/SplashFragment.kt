@@ -23,14 +23,6 @@ class SplashFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val timer = Timer("schedule", true) // MainActivity will handle loading data
-
-        timer.schedule(2000) {
-            Navigation.findNavController(view).navigate(R.id.to_login_action)
-        }
-
+        Navigation.findNavController(view).navigate(R.id.to_login_action)
     }
-
-
 }
