@@ -9,7 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 
-interface ApiUserService {
+interface IUserService {
 
     @GET("/api/users/{Id}")
     fun getUserDataAsync(@Path("Id") Id: String): Deferred<Response>
