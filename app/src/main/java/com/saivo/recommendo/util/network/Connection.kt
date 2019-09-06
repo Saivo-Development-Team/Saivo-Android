@@ -6,7 +6,7 @@ import com.saivo.recommendo.util.exception.ConnectionOfflineException
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class Connection(context: Context) : IConnectivity {
+class Connection(context: Context) : IConnection {
     private val applicationContext = context.applicationContext
     override fun intercept(chain: Interceptor.Chain): Response {
         if (!gotInternet()){
