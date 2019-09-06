@@ -16,7 +16,7 @@ interface IClientService {
     ) : Deferred<Token>
 
     @POST("/clients/register")
-    fun registerClient(@Body clientSecret: String) : Deferred<String>
+    fun registerClientAsync(@Body clientSecret: String) : Deferred<String>
 
     @GET("/api/clients/{clientId}")
     fun getClientData(@Path("clientId") clientId: String) : Deferred<Client>

@@ -7,15 +7,13 @@ import com.saivo.recommendo.network.resquest.IClientService
 import retrofit2.Retrofit
 import retrofit2.create
 
-class ClientDataSource(private val service: Retrofit) : IClientDataSource {
+class ClientDataSource(private val clientService: IClientService) : IClientDataSource {
     override val clientCredentials: LiveData<Client>
-        get() = currentClient
+        get() = fetchedClient
 
-    private var currentClient = MutableLiveData<Client>()
+    private var fetchedClient = MutableLiveData<Client>()
 
     override suspend fun registerClientAsync(clientSecret: String): String {
-        return service.create<IClientService>().registerClient(clientSecret).await()
+        return clientService.registerClientAsync(clientSecret).await()
     }
-
-
 }
