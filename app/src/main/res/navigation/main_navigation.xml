@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/app_navigation"
+        app:startDestination="@id/splash">
+
+    <fragment
+            android:id="@+id/splash"
+            android:name="com.saivo.recommendo.view.main.SplashFragment"
+            android:label="fragment_splash"
+            tools:layout="@layout/fragment_splash">
+        <action
+                android:id="@+id/to_login_action"
+                app:destination="@id/login" />
+    </fragment>
+    <fragment
+            android:id="@+id/login"
+            android:name="com.saivo.recommendo.view.auth.LoginFragment"
+            android:label="fragment_login"
+            tools:layout="@layout/fragment_login">
+        <action
+                android:id="@+id/login_to_register_action"
+                app:destination="@id/register" />
+        <action
+                android:id="@+id/login_to_reset_password_action"
+                app:destination="@id/reset_password" />
+        <action
+                android:id="@+id/action_login_to_home"
+                app:destination="@id/home" />
+    </fragment>
+    <fragment
+            android:id="@+id/register"
+            android:name="com.saivo.recommendo.view.auth.RegisterFragment"
+            android:label="fragment_register"
+            tools:layout="@layout/fragment_register">
+        <action
+                android:id="@+id/action_register_to_home"
+                app:destination="@id/home" />
+    </fragment>
+    <fragment
+            android:id="@+id/reset_password"
+            android:name="com.saivo.recommendo.view.auth.ResetPasswordFragment"
+            android:label="fragment_reset_password"
+            tools:layout="@layout/fragment_reset_password"/>
+    <activity
+            android:id="@+id/home"
+            android:name="com.saivo.recommendo.view.main.page.HomeActivity"
+            android:label="activity_home"
+            tools:layout="@layout/activity_home" />
+</navigation>

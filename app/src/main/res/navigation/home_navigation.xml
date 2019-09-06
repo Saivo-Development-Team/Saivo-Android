@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/home_navigation"
+        app:startDestination="@id/map">
+
+    <fragment
+            android:id="@+id/dashboard"
+            android:name="com.saivo.recommendo.view.main.page.DashboardFragment"
+            android:label="fragment_dashboard"
+            tools:layout="@layout/fragment_dashboard" >
+        <action
+                android:id="@+id/action_dashboard_to_settings"
+                app:destination="@id/settings" />
+    </fragment>
+    <fragment
+            android:id="@+id/map"
+            android:name="com.saivo.recommendo.view.main.page.MapFragment"
+            android:label="fragment_map"
+            tools:layout="@layout/fragment_map" />
+    <fragment
+            android:id="@+id/notifications"
+            android:name="com.saivo.recommendo.view.main.page.NotificationsFragment"
+            android:label="fragment_notifications"
+            tools:layout="@layout/fragment_notifications" />
+    <fragment
+            android:id="@+id/preferences"
+            android:name="com.saivo.recommendo.view.main.page.PreferencesFragment"
+            android:label="fragment_preferences"
+            tools:layout="@layout/fragment_preferences" />
+    <fragment
+            android:id="@+id/settings"
+            android:name="com.saivo.recommendo.view.main.page.SettingsFragment"
+            android:label="fragment_settings"
+            tools:layout="@layout/fragment_settings" >
+        <action
+                android:id="@+id/action_settings_to_preferences"
+                app:destination="@id/preferences" />
+    </fragment>
+</navigation>
