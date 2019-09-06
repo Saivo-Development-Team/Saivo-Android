@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Recommendo</string>
+    <string name="app_name">Saivo</string>
     <!-- Strings related to userLoggedIn -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -50,4 +50,6 @@
     <string name="notifications_text">Notifications</string>
     <string name="dashboard_text">Dashboard</string>
     <string name="mapview_text">MapView</string>
+    <string name="saivo_logo_map_marker">Saivo Logo Map Marker</string>
+    <string name="map">Map</string>
 </resources>
