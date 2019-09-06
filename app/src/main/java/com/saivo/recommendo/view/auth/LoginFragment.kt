@@ -38,11 +38,11 @@ class LoginFragment : CoroutineFragment(), KodeinAware {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         authViewModel = ViewModelProvider(this, authViewModelFactory).get(AuthViewModel::class.java)
         val form: Array<EditText> = arrayOf(login_password_editText, login_email_editText)
-        activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)?.visibility =
-            View.GONE
-        super.onViewCreated(view, savedInstanceState)
+
         fun switchButton(boolean: Boolean) {
             login_button.isEnabled = boolean
         }

@@ -1,34 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/MainViewCoordinatorLayout"
+        android:id="@+id/CoordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
         android:layout_marginTop="0dp"
         android:orientation="vertical"
         android:screenOrientation="sensor"
-        tools:context=".view.main.MainFragment">
+        tools:context=".view.main.page.MapFragment">
 
-    <TextView
+    <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/mapview_text"
-            android:textSize="30sp" />
-    <!--    <com.mapbox.mapboxsdk.maps.MapView-->
-    <!--            android:id="@+id/MainMapView"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:layout_alignStart="@+id/MainViewCoordinatorLayout"-->
-    <!--            android:elevation="0dp"-->
-    <!--            mapbox:mapbox_cameraTargetLat="40.73581"-->
-    <!--            mapbox:mapbox_cameraTargetLng="-73.99155"-->
-    <!--            mapbox:mapbox_cameraZoom="11"-->
-    <!--            />-->
+            android:layout_height="match_parent"/>
 
     <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"

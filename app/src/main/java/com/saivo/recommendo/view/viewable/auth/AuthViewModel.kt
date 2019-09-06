@@ -46,7 +46,7 @@ class AuthViewModel : ViewModel(), IAuthRegisterUser, IAuthLoginUser {
     }
 
     override fun userLoggedIn(view: View) {
-        Navigation.findNavController(view).navigate(R.id.login_to_main_ui_action)
+        Navigation.findNavController(view).navigate(R.id.action_login_to_home)
     }
 
     override fun registerUser(view: View) {
@@ -58,7 +58,7 @@ class AuthViewModel : ViewModel(), IAuthRegisterUser, IAuthLoginUser {
     }
 
     override fun userRegistered(view: View) {
-        Navigation.findNavController(view).navigate(R.id.register_to_main_ui_action)
+        Navigation.findNavController(view).navigate(R.id.action_register_to_home)
     }
 
     override fun setRegisterCredentials(registerCredentials: RegisterCredentials) {

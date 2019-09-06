@@ -37,8 +37,7 @@ class RegisterFragment : CoroutineFragment(), KodeinAware {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)?.visibility =
-            View.GONE
+
         authViewModel = ViewModelProvider(this, authViewModelFactory).get(AuthViewModel::class.java)
         val form: Array<EditText> = arrayOf(
             register_email_editText, register_password_editText,

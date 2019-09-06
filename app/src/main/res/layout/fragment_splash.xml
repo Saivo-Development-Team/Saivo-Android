@@ -6,6 +6,30 @@
                                                    android:layout_height="match_parent"
                                                    tools:context=".view.main.SplashFragment"
 >
+
+
+    <androidx.constraintlayout.widget.Group
+            android:id="@+id/splash_progress_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:constraint_referenced_ids="splash_loading_text,splash_progress_bar"
+        />
+    <ImageView
+            android:id="@+id/logo_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/logo"
+            android:gravity="center|center_horizontal|center_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/splash_loading_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:contentDescription="@string/saivo_logo_map_marker" />
     <TextView
             android:text="@string/loading_text"
             android:layout_width="wrap_content"
@@ -15,7 +39,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logo_image"
             app:layout_constraintBottom_toTopOf="@+id/splash_progress_bar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +47,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintVertical_bias="0.9"
             android:textColor="@color/white"
     />
