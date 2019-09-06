@@ -95,9 +95,6 @@ dependencies {
     implementation "org.kodein.di:kodein-di-generic-jvm:$kodein_version"
     implementation "org.kodein.di:kodein-di-framework-android-x:$kodein_version"
 
-    /* Mapbox */
-    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:8.3.0-alpha.3'
-
     /* OTP-PinView */
     implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.0.3'
 
@@ -114,5 +111,4 @@ dependencies {
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 
     kapt "androidx.room:room-compiler:$room_version"
-//    kapt 'com.android.databinding:compiler:3.1.4'
 }
