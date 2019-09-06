@@ -1,6 +1,5 @@
 package com.saivo.recommendo.data.access
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -14,6 +13,6 @@ interface ClientDao {
     fun updateClientCredentials(client: Client)
 
     @Query("select * from client where deviceClient = 0")
-    fun getClientCredentials(): LiveData<Client>
+    fun getClientCredentials(): Client
 
 }
