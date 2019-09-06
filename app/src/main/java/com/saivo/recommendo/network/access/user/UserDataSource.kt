@@ -9,25 +9,22 @@ import com.saivo.recommendo.data.objects.RegisterCredentials
 import com.saivo.recommendo.data.objects.Response
 import com.saivo.recommendo.network.resquest.IUserService
 import retrofit2.HttpException
-import retrofit2.Retrofit
-import retrofit2.create
 import java.net.SocketTimeoutException
 
 class UserDataSource(
-    private val service: Retrofit
+    private val userService: IUserService
 ) : IUserDataSource {
-    private val currentUserData = MutableLiveData<UserData>()
+    private val fetchedUserData = MutableLiveData<UserData>()
 
     override val userData: LiveData<UserData>
-        get() = currentUserData
+        get() = fetchedUserData
 
     override suspend fun getUserDataAsync(Id: String): Response {
         var response = Response()
         try {
-            response = service.create<IUserService>()
-                .getUserDataAsync(Id).await()
+            response = userService.getUserDataAsync(Id).await()
             if (response.data != null) {
-                currentUserData.postValue(response.getObjectFromData(UserData::class.java))
+                fetchedUserData.postValue(response.getObjectFromData(UserData::class.java))
             }
         } catch (e: HttpException) {
             Log.e("Network", "[${e.cause}]: ${e.message!!}")
@@ -38,10 +35,9 @@ class UserDataSource(
     override suspend fun loginUserAsync(credentials: LoginCredentials): Response {
         var response = Response()
         try {
-            response = service.create<IUserService>()
-                .loginUserAsync(credentials).await()
+            response = userService.loginUserAsync(credentials).await()
             if (response.data != null) {
-                currentUserData.postValue(response.getObjectFromData(UserData::class.java))
+                fetchedUserData.postValue(response.getObjectFromData(UserData::class.java))
             }
         } catch (e: Exception) {
             Log.e("Network", "[${e.cause}]: ${e.message!!}")
@@ -69,8 +65,7 @@ class UserDataSource(
 
     override suspend fun registerUserAsync(credentials: RegisterCredentials): Response {
         try {
-            return service.create<IUserService>()
-                .registerUserAsync(credentials).await()
+            return userService.registerUserAsync(credentials).await()
         } catch (e: Exception) {
             Log.e("Network", "[${e.cause}]: ${e.message!!}")
         }
