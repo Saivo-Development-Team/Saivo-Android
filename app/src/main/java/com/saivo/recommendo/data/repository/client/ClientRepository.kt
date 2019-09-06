@@ -1,12 +1,10 @@
 package com.saivo.recommendo.data.repository.client
 
-import androidx.lifecycle.LiveData
 import at.favre.lib.crypto.bcrypt.BCrypt
 import com.saivo.recommendo.data.access.ClientDao
 import com.saivo.recommendo.data.model.infrastructure.Client
 import com.saivo.recommendo.network.access.client.IClientDataSource
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -23,10 +21,8 @@ class ClientRepository(
         }
     }
 
-    override suspend fun getClientCredentials(): LiveData<Client> {
-        return withContext(IO) {
-            clientDao.getClientCredentials()
-        }
+    override fun getClientCredentials(): Client {
+        return clientDao.getClientCredentials()
     }
 
     private suspend fun createClientCredentials(): Client {

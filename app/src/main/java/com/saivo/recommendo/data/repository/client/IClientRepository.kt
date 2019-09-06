@@ -4,5 +4,5 @@ import androidx.lifecycle.LiveData
 import com.saivo.recommendo.data.model.infrastructure.Client
 
 interface IClientRepository {
-    suspend fun getClientCredentials(): LiveData<Client>
+    fun getClientCredentials(): Client
 }
