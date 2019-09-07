@@ -14,6 +14,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.debug
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
@@ -28,6 +29,9 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            resValue("string", "maps_key", MAP_KEY)
+            buildConfigField('String', "BaseUrl", API_HOST)
+            buildConfigField('String', "BearerToken", ACCESS_TOKEN)
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
