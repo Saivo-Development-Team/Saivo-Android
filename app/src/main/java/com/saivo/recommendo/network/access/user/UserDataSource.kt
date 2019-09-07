@@ -8,6 +8,7 @@ import com.saivo.recommendo.data.objects.LoginCredentials
 import com.saivo.recommendo.data.objects.RegisterCredentials
 import com.saivo.recommendo.data.objects.Response
 import com.saivo.recommendo.network.resquest.IUserService
+import com.saivo.recommendo.util.exception.ConnectionOfflineException
 import retrofit2.HttpException
 import java.net.SocketTimeoutException
 
@@ -42,10 +43,10 @@ class UserDataSource(
         } catch (e: Exception) {
             Log.e("Network", "[${e.cause}]: ${e.message!!}")
             when (e) {
-                is HttpException -> {
-                    Log.e("Network", e.message!!)
+                is ConnectionOfflineException -> {
+                    Log.e("Connection", e.message!!)
                     response = Response(
-                        error = "HttpException",
+                        error = "ConnectionOfflineException",
                         status = "NETWORK_ERROR",
                         message = "Check Internet access"
                     )
