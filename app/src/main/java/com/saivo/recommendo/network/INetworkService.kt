@@ -18,7 +18,7 @@ interface INetworkService {
             val interceptor = Interceptor {
                 val url = it.request().url().newBuilder().build()
                 val request = it.request().newBuilder().url(url)
-                    .addHeader("Authorization", BuildConfig.BearerToken)
+                    .addHeader("Authorization", getToken())
                     .build()
                 return@Interceptor it.proceed(request)
             }
@@ -28,10 +28,20 @@ interface INetworkService {
                 .addInterceptor(connection)
                 .build()
 
-            return Retrofit.Builder().client(httpClient).baseUrl(BuildConfig.BaseUrl)
+            return Retrofit.Builder().client(httpClient).baseUrl(getBaseUrl())
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(T::class.java)
+        }
+
+        fun getToken(): String {
+            return if (BuildConfig.DEBUG) BuildConfig.BearerToken
+            else ""
+        }
+
+        fun getBaseUrl(): String {
+            return if (BuildConfig.DEBUG) BuildConfig.BaseUrl
+            else ""
         }
     }
 }
