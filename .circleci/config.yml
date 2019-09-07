@@ -11,16 +11,17 @@ jobs:
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
+          name: Add Gradle Properties
+          command: printf "android.useAndroidX=true\n
+          android.enableJetifier=true\n
+          kotlin.code.style=official\n" >> gradle.properties &&
+          printf "MAP_KEY=\"\"\nAPI_HOST=\"\"\nACCESS_TOKEN=\"\"\n" >> gradle.properties
+      - run:
           name: Chmod permissions
           command: sudo chmod +x ./gradlew
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
-      - run:
-          name: Add Gradle Properties
-          command: mkdir gradle.properties
-#          printf "android.useAndroidX=true\nandroid.enableJetifier=true\nkotlin.code.style=official\n" >> gradle.properties
-#          printf "MAP_KEY=\"\"\nAPI_HOST=\"\"\nACCESS_TOKEN=\"\"\n">> gradle.properties
       - save_cache:
           paths:
             - ~/.gradle
