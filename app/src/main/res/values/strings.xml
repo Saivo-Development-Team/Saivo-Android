@@ -52,4 +52,8 @@
     <string name="mapview_text">MapView</string>
     <string name="saivo_logo_map_marker">Saivo Logo Map Marker</string>
     <string name="map">Map</string>
+    <string name="enter_preference">Enter Preference</string>
+    <string name="add">Add</string>
+    <string name="remove">Remove</string>
+    <string name="preferences">PREFERENCES</string>
 </resources>
