@@ -7,6 +7,7 @@ import com.saivo.recommendo.data.model.infrastructure.UserData
 import com.saivo.recommendo.data.objects.LoginCredentials
 import com.saivo.recommendo.data.objects.RegisterCredentials
 import com.saivo.recommendo.data.objects.Response
+import com.saivo.recommendo.network.access.IUserDataSource
 import com.saivo.recommendo.network.resquest.IUserService
 import com.saivo.recommendo.util.exception.ConnectionOfflineException
 import retrofit2.HttpException
@@ -50,6 +51,7 @@ class UserDataSource(
                         status = "NETWORK_ERROR",
                         message = "Check Internet access"
                     )
+                    e.printStackTrace()
                 }
                 is SocketTimeoutException -> {
                     Log.e("Timeout", e.message!!)
