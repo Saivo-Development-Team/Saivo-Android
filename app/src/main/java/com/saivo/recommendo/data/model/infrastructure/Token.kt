@@ -3,7 +3,7 @@ package com.saivo.recommendo.data.model.infrastructure
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import java.sql.Timestamp
+import org.threeten.bp.ZonedDateTime
 
 @Entity(tableName = "token")
 data class Token(
@@ -12,7 +12,7 @@ data class Token(
     @SerializedName("access_token")
     val accessToken: String,
     @SerializedName("refresh_token")
-    val refreshToken: String,
+    val refreshToken: String?,
     @SerializedName("expires_in")
     val expiresIn: Int,
     @SerializedName("token_type")

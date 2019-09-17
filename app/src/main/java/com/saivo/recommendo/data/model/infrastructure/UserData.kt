@@ -4,7 +4,7 @@ import com.saivo.recommendo.data.model.domain.Preference
 import com.saivo.recommendo.data.model.domain.User
 
 data class UserData(
-    val id: String = "",
+    val user: String = "",
     val email: String = "",
     val enabled: Boolean = true,
     val lastname: String = "",
@@ -14,7 +14,7 @@ data class UserData(
 ) {
     fun getUserDetailsFromData(): User {
         return User(
-            id = id,
+            user = user,
             email = email,
             enabled = enabled,
             lastname = lastname,

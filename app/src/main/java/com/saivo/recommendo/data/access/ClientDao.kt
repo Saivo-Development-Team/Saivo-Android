@@ -13,6 +13,6 @@ interface ClientDao {
     fun updateClientCredentials(client: Client)
 
     @Query("select * from client where deviceClient = 0")
-    fun getClientCredentials(): Client
+    fun getClientCredentials(): Client?
 
 }

@@ -14,10 +14,11 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun updateUserData(user: User)
 
-    @Query("select * from user where email = :email")
-    fun getUserData(email: String): LiveData<User>
+    @Query("select * from user where id = 0")
+    fun getUserData(): LiveData<User>
 
-    @Query("select id from user where email = :email")
-    fun getUserId(email: String): String
+    @Query("select user from user where id = 0")
+    fun getUserId(): String
+
 //    fun getUserRatings(): LiveData<List<Rating>>
 }
