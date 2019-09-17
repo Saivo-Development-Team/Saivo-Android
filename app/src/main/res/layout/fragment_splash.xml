@@ -8,16 +8,25 @@
 >
 
 
+    <ImageView
+            android:id="@+id/map_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/map_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.Group
             android:id="@+id/splash_progress_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="visible"
-            app:layout_constraintTop_toTopOf="parent"
+            app:constraint_referenced_ids="splash_loading_text,splash_progress_bar,map_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:constraint_referenced_ids="splash_loading_text,splash_progress_bar"
-        />
+            app:layout_constraintTop_toTopOf="parent" />
     <ImageView
             android:id="@+id/logo_image"
             android:layout_width="120dp"
@@ -30,6 +39,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             android:contentDescription="@string/saivo_logo_map_marker" />
+
     <TextView
             android:text="@string/loading_text"
             android:layout_width="wrap_content"
