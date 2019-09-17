@@ -18,20 +18,10 @@ class Connection(context: Context) : IConnection {
     }
 
     private fun gotInternet(): Boolean {
-        var connected: Boolean? = null
         val connectivityManager = applicationContext.getSystemService(
             Context.CONNECTIVITY_SERVICE
         ) as ConnectivityManager
-
-        connectivityManager.registerNetworkCallback(
-            NetworkRequest.Builder().build(),
-            object : NetworkCallback() {
-                override fun onAvailable(network: Network) {
-                    connected = true
-                    super.onAvailable(network)
-                }
-            })
-        return connected ?: false
+        val nesting = connectivityManager.activeNetworkInfo
+        return (nesting != null && nesting.isConnected) || connectivityManager.isDefaultNetworkActive
     }
-
 }
