@@ -1,0 +1,93 @@
+package com.saivo.recommendo.view.fragment.pages
+
+
+import android.annotation.SuppressLint
+import android.os.Build
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI.*
+import com.saivo.recommendo.R
+import com.saivo.recommendo.view.fragment.CoroutineFragment
+import com.saivo.recommendo.view.viewmodel.auth.AuthViewModelFactory
+import com.saivo.recommendo.view.viewmodel.user.IUserViewModel
+import com.saivo.recommendo.view.viewmodel.user.UserViewModel
+import com.saivo.recommendo.view.viewmodel.user.UserViewModelFactory
+import kotlinx.android.synthetic.main.fragment_dashboard.*
+import kotlinx.android.synthetic.main.layout_profile_banner.*
+import kotlinx.coroutines.launch
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
+
+/**
+ * A simple [Fragment] subclass.
+ */
+class DashboardFragment : CoroutineFragment(), KodeinAware {
+    override val kodein: Kodein by closestKodein()
+    private lateinit var userViewModel: IUserViewModel
+    private val userViewModelFactory: UserViewModelFactory by instance()
+    //
+    private lateinit var drawerToggle: ActionBarDrawerToggle
+    private lateinit var appCompatActivity: AppCompatActivity
+    private lateinit var dashboardNavController: NavController
+
+    @RequiresApi(Build.VERSION_CODES.P)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_dashboard, container, false)
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        userViewModel = ViewModelProvider(this, userViewModelFactory).get(UserViewModel::class.java)
+
+        launch {
+            userViewModel.userData.await().observe(
+                this@DashboardFragment, Observer {
+                    fullname.text = "${it.firstname} ${it.lastname}"
+                    email_text_view.text = it.email
+                }
+            )
+        }
+
+        setupNavController()
+        setupMaterialToolbar()
+        setupWithNavController(navigation_view, dashboardNavController)
+        setupWithNavController(materialToolbar, dashboardNavController, drawerLayout)
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun setupMaterialToolbar() {
+        appCompatActivity = (activity as AppCompatActivity)
+        appCompatActivity.setSupportActionBar(materialToolbar)
+        appCompatActivity.title = dashboardNavController.currentDestination?.label
+        drawerToggle = ActionBarDrawerToggle(
+            appCompatActivity, drawerLayout, materialToolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+
+        drawerLayout.addDrawerListener(drawerToggle)
+        drawerToggle.syncState()
+    }
+
+    private fun setupNavController() {
+        dashboardNavController = (childFragmentManager
+            .findFragmentById(R.id.dashboard_navigation_host) as NavHostFragment)
+            .navController
+    }
+}
