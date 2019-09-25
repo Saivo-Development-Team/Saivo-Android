@@ -11,13 +11,13 @@ import retrofit2.http.Path
 
 interface IUserService {
 
-    @GET("/api/users/{Id}")
+    @GET("/user/{Id}")
     fun getUserDataAsync(@Path("Id") Id: String): Deferred<Response>
 
-    @POST("/users/login")
+    @POST("/user/login")
     fun loginUserAsync(@Body loginCredentials: LoginCredentials): Deferred<Response>
 
-    @POST("/users/register")
+    @POST("/user/register")
     fun registerUserAsync(@Body registerCredentials: RegisterCredentials): Deferred<Response>
 
 }
