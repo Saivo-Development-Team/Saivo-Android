@@ -6,18 +6,18 @@ class DataSource{
 
     companion object{
 
-        fun createDataSet(): ArrayList<RecyclerView>{
-            val list = ArrayList<RecyclerView>()
-            list.add( RecyclerView(
+        fun createDataSet(): ArrayList<RecyclerItem>{
+            val list = ArrayList<RecyclerItem>()
+            list.add( RecyclerItem(
                 "Preference"
             )
             )
 
-            list.add( RecyclerView(
+            list.add( RecyclerItem(
                 "Preference2"
             )
             )
-            list.add( RecyclerView(
+            list.add( RecyclerItem(
                 "Preference3"
             )
             )

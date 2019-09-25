@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.recyclerview_item.view.*
 
 class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
-    private var items: List<RecyclerView> = ArrayList()
+    private var items = ArrayList<RecyclerItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
     return RecyclerViewHolder(
@@ -25,7 +25,7 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
     when(holder){
         is RecyclerViewHolder -> {
-            holder.bind(items.get(position))
+            holder.bind(items[position])
         }
     }
 
@@ -36,17 +36,17 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         return items.size
     }
 
-    fun submitList(RecyclerList: List<RecyclerView>)
-    {items = RecyclerList
+    fun submitList(list: ArrayList<RecyclerItem>)
+    {items = list
     }
 
     class RecyclerViewHolder constructor(
        itemView: View
     ): RecyclerView.ViewHolder(itemView){
-        val preference : TextView = itemView.preference
+        private val preference : TextView = itemView.preference
 
-        fun bind(recyclerView: RecyclerView){
-            preference.text.equals( recyclerView.preference)
+        fun bind(recyclerItem: RecyclerItem){
+            preference.text = recyclerItem.preference
 
 
         }

@@ -1,9 +1,10 @@
 package com.saivo.recommendo.view.main.page
 
-data class RecyclerView(
+import androidx.recyclerview.widget.RecyclerView
+
+ class RecyclerItem (
     var preference: String
 
 )
-{
 
-}
+
