@@ -9,13 +9,13 @@ import retrofit2.http.Query
 interface ITokenService {
 
     @POST("/oauth/token")
-    fun getTokenWithClientAsync(
+    fun getTokenByClientAsync(
         @Query("grant_type") grant_type: String,
         @Header("Authorization") authentication: String
     ) : Deferred<Token>
 
     @POST("/oauth/token")
-    fun getTokenWithUserAsync(
+    fun getTokenByUserAsync(
         @Query("email") email: String,
         @Query("password") password: String,
         @Query("grant_type") grant_type: String,

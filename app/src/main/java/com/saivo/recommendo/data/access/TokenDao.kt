@@ -12,8 +12,8 @@ interface TokenDao {
     fun updateTokenData(token: Token)
 
     @Query("select accessToken from token where deviceToken = 0")
-    fun getAccessToken(): String
+    fun getAccessToken(): String?
 
     @Query("select tokenType from token where deviceToken = 0")
-    fun getTokenType(): String
+    fun getTokenType(): String?
 }

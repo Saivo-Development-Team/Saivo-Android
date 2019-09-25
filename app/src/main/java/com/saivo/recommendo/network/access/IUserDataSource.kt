@@ -1,4 +1,4 @@
-package com.saivo.recommendo.network.access.user
+package com.saivo.recommendo.network.access
 
 import androidx.lifecycle.LiveData
 import com.saivo.recommendo.data.model.infrastructure.UserData

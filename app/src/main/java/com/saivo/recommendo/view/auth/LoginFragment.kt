@@ -7,9 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.saivo.recommendo.R
-import com.saivo.recommendo.network.access.user.IUserDataSource
+import com.saivo.recommendo.network.access.IUserDataSource
 import com.saivo.recommendo.util.helpers.*
 import com.saivo.recommendo.util.helpers.Status.LOGIN_SUCCESSFUL
 import com.saivo.recommendo.util.helpers.Status.LOGIN_UNSUCCESSFUL
@@ -85,8 +84,8 @@ class LoginFragment : CoroutineFragment(), KodeinAware {
                             authViewModel.userLoggedIn(view)
                         }
                         LOGIN_UNSUCCESSFUL ->
-                            Display.toastMessage(this@LoginFragment.context, message)
-                        else -> Display.toastMessage(this@LoginFragment.context, message)
+                            toastMessage(this@LoginFragment.context, message)
+                        else -> toastMessage(this@LoginFragment.context, message)
                     }
                 }
             }
