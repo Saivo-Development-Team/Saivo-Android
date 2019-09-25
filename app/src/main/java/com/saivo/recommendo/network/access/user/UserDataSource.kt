@@ -35,7 +35,7 @@ class UserDataSource(
     }
 
     override suspend fun loginUserAsync(credentials: LoginCredentials): Response {
-        var response = Response()
+        var response: Response
         try {
             response = userService.loginUserAsync(credentials).await()
             if (response.data != null) {
@@ -59,6 +59,14 @@ class UserDataSource(
                         error = "SocketTimeoutException",
                         status = "TIMEOUT_ERROR",
                         message = "Server is down at the moment"
+                    )
+                }
+                else -> {
+                    Log.e("Error", e.message.toString())
+                    response = Response(
+                        error = e.cause.toString(),
+                        status = "UNKNOWN_ERROR",
+                        message = "Looks like we missed this error"
                     )
                 }
             }
