@@ -1,26 +1,23 @@
-package com.saivo.recommendo.view.main.page
-
+package com.saivo.recommendo.view.fragment.pages
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.saivo.recommendo.R
 
-/**
- * A simple [Fragment] subclass.
- */
-class SettingsFragment : Fragment() {
+class PreferencesFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+        return inflater.inflate(R.layout.fragment_preferences, container, false)
     }
 
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
 }

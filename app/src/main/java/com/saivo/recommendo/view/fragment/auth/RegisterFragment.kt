@@ -1,4 +1,4 @@
-package com.saivo.recommendo.view.auth
+package com.saivo.recommendo.view.fragment.auth
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,10 +10,10 @@ import com.saivo.recommendo.R
 import com.saivo.recommendo.network.access.IUserDataSource
 import com.saivo.recommendo.util.helpers.*
 import com.saivo.recommendo.util.helpers.Status.REGISTRATION_SUCCESSFUL
-import com.saivo.recommendo.view.main.CoroutineFragment
-import com.saivo.recommendo.view.viewable.auth.AuthViewModel
-import com.saivo.recommendo.view.viewable.auth.AuthViewModelFactory
-import com.saivo.recommendo.view.viewable.auth.IAuthRegisterUser
+import com.saivo.recommendo.view.fragment.CoroutineFragment
+import com.saivo.recommendo.view.viewmodel.auth.AuthViewModel
+import com.saivo.recommendo.view.viewmodel.auth.AuthViewModelFactory
+import com.saivo.recommendo.view.viewmodel.auth.IAuthRegisterUser
 import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware

@@ -1,4 +1,4 @@
-package com.saivo.recommendo.view.main.page
+package com.saivo.recommendo.view.fragment.pages
 
 
 import android.os.Bundle
@@ -15,15 +15,15 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.saivo.recommendo.R
-import com.saivo.recommendo.view.main.CoroutineFragment
-import com.saivo.recommendo.view.viewable.auth.AuthViewModel
-import com.saivo.recommendo.view.viewable.user.UserViewModel
-import com.saivo.recommendo.view.viewable.user.UserViewModelFactory
+import com.saivo.recommendo.view.fragment.CoroutineFragment
+import com.saivo.recommendo.view.viewmodel.auth.AuthViewModelFactory
+import com.saivo.recommendo.view.viewmodel.user.IUserViewModel
+import com.saivo.recommendo.view.viewmodel.user.UserViewModel
+import com.saivo.recommendo.view.viewmodel.user.UserViewModelFactory
 import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
-import org.kodein.di.android.closestKodein
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
@@ -32,7 +32,7 @@ import org.kodein.di.generic.instance
  */
 class MapFragment : CoroutineFragment(), KodeinAware, OnMapReadyCallback {
     override val kodein: Kodein by closestKodein()
-    private lateinit var userViewModel: UserViewModel
+    private lateinit var userViewModel: IUserViewModel
     private val userViewModelFactory: UserViewModelFactory by instance()
 
     override fun onCreateView(

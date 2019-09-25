@@ -1,4 +1,4 @@
-package com.saivo.recommendo.view.viewable.auth
+package com.saivo.recommendo.view.viewmodel.auth
 
 import android.view.View
 import android.widget.EditText

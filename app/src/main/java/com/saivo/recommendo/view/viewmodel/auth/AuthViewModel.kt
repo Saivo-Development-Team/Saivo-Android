@@ -1,10 +1,10 @@
-package com.saivo.recommendo.view.viewable.auth
+package com.saivo.recommendo.view.viewmodel.auth
 
 import android.view.View
 import android.widget.EditText
+import androidx.lifecycle.ViewModel
 import com.saivo.recommendo.data.objects.LoginCredentials
 import com.saivo.recommendo.data.objects.RegisterCredentials
-import androidx.lifecycle.ViewModel
 import androidx.navigation.Navigation
 import com.saivo.recommendo.R
 import com.saivo.recommendo.util.helpers.formNotEmpty

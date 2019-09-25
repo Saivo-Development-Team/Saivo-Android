@@ -1,4 +1,4 @@
-package com.saivo.recommendo.view.main
+package com.saivo.recommendo.view.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,4 +1,4 @@
-package com.saivo.recommendo.view.main
+package com.saivo.recommendo.view.fragment
 
 
 import android.os.Bundle
@@ -69,13 +69,13 @@ class SplashFragment : CoroutineFragment(), KodeinAware {
         }
     }
 
-    private suspend fun createAccessToken(t: TokenDao, c: Client): String = withContext(IO) {
+    private suspend fun createAccessToken(tokenDao: TokenDao, client: Client): String = withContext(IO) {
         setLoadingText("Getting Access")
         retrofit<ITokenService>(connection = connection).getTokenByClientAsync(
-            authentication = basic(c.clientId, c.clientSecret),
+            authentication = basic(client.clientId, client.clientSecret),
             grant_type = "client_credentials"
         ).await().apply {
-            t.updateTokenData(this)
+            tokenDao.updateTokenData(this)
         }.accessToken
     }
 

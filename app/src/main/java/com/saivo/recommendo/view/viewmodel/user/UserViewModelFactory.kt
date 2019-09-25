@@ -1,4 +1,4 @@
-package com.saivo.recommendo.view.viewable.user
+package com.saivo.recommendo.view.viewmodel.user
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
