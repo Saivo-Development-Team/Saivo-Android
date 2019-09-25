@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="unit_system_values">
+        <item>METRIC</item>
+        <item>IMPERIAL</item>
+    </string-array>
+    <string-array name="unit_system_entries">
+        <item>Metric</item>
+        <item>Imperial</item>
+    </string-array>
+    <string-array name="place_keys">
+        <item>ACCOUNTING</item>
+        <item>AIRPORT</item>
+        <item>AMUSEMENT_PARK</item>
+        <item>AQUARIUM</item>
+        <item>ART_GALLERY</item>
+        <item>ATM</item>
+        <item>BAKERY</item>
+        <item>BANK</item>
+        <item>BAR</item>
+        <item>BEAUTY_SALON</item>
+        <item>BICYCLE_STORE</item>
+        <item>BOOK_STORE</item>
+        <item>BOWLING_ALLEY</item>
+        <item>BUS_STATION</item>
+        <item>CAFE</item>
+        <item>CAMPGROUND</item>
+        <item>CAR_DEALER</item>
+        <item>CAR_RENTAL</item>
+        <item>CAR_REPAIR</item>
+        <item>CAR_WASH</item>
+        <item>CASINO</item>
+        <item>CEMETERY</item>
+        <item>CHURCH</item>
+        <item>CITY_HALL</item>
+        <item>CLOTHING_STORE</item>
+        <item>CONVENIENCE_STORE</item>
+        <item>COURTHOUSE</item>
+        <item>DENTIST</item>
+        <item>DEPARTMENT_STORE</item>
+        <item>DOCTOR</item>
+        <item>DRUGSTORE</item>
+        <item>ELECTRICIAN</item>
+        <item>ELECTRONICS_STORE</item>
+        <item>EMBASSY</item>
+        <item>FIRE_STATION</item>
+        <item>FLORIST</item>
+        <item>FUNERAL_HOME</item>
+        <item>FURNITURE_STORE</item>
+        <item>GAS_STATION</item>
+        <item>GYM</item>
+        <item>HAIR_CARE</item>
+        <item>HARDWARE_STORE</item>
+        <item>HINDU_TEMPLE</item>
+        <item>HOME_GOODS_STORE</item>
+        <item>HOSPITAL</item>
+        <item>INSURANCE_AGENCY</item>
+        <item>JEWELRY_STORE</item>
+        <item>LAUNDRY</item>
+        <item>LAWYER</item>
+        <item>LIBRARY</item>
+        <item>LIQUOR_STORE</item>
+        <item>LOCAL_GOVERNMENT_OFFICE</item>
+        <item>LOCKSMITH</item>
+        <item>LODGING</item>
+        <item>MEAL_DELIVERY</item>
+        <item>MEAL_TAKEAWAY</item>
+        <item>MOSQUE</item>
+        <item>MOVIE_RENTAL</item>
+        <item>MOVIE_THEATER</item>
+        <item>MOVING_COMPANY</item>
+        <item>MUSEUM</item>
+        <item>NIGHT_CLUB</item>
+        <item>PAINTER</item>
+        <item>PARK</item>
+        <item>PARKING</item>
+        <item>PET_STORE</item>
+        <item>PHARMACY</item>
+        <item>PHYSIOTHERAPIST</item>
+        <item>PLUMBER</item>
+        <item>POLICE</item>
+        <item>POST_OFFICE</item>
+        <item>PRIMARY_SCHOOL</item>
+        <item>REAL_ESTATE_AGENCY</item>
+        <item>RESTAURANT</item>
+        <item>ROOFING_CONTRACTOR</item>
+        <item>RV_PARK</item>
+        <item>SCHOOL</item>
+        <item>SECONDARY_SCHOOL</item>
+        <item>SHOE_STORE</item>
+        <item>SHOPPING_MALL</item>
+        <item>SPA</item>
+        <item>STADIUM</item>
+        <item>STORAGE</item>
+        <item>STORE</item>
+        <item>SUBWAY_STATION</item>
+        <item>SUPERMARKET</item>
+        <item>SYNAGOGUE</item>
+        <item>TAXI_STAND</item>
+        <item>TOURIST_ATTRACTION</item>
+        <item>TRAIN_STATION</item>
+        <item>TRANSIT_STATION</item>
+        <item>TRAVEL_AGENCY</item>
+        <item>UNIVERSITY</item>
+        <item>VETERINARY_CARE</item>
+        <item>ZOO</item>
+        <item>ADMINISTRATIVE_AREA_LEVEL_1</item>
+        <item>ADMINISTRATIVE_AREA_LEVEL_2</item>
+        <item>ADMINISTRATIVE_AREA_LEVEL_3</item>
+        <item>ADMINISTRATIVE_AREA_LEVEL_4</item>
+        <item>ADMINISTRATIVE_AREA_LEVEL_5</item>
+        <item>COLLOQUIAL_AREA</item>
+        <item>ESTABLISHMENT</item>
+        <item>FINANCE</item>
+        <item>FLOOR</item>
+        <item>FOOD</item>
+        <item>GENERAL_CONTRACTOR</item>
+        <item>GEOCODE</item>
+        <item>HEALTH</item>
+        <item>INTERSECTION</item>
+        <item>LOCALITY</item>
+        <item>NATURAL_FEATURE</item>
+        <item>NEIGHBORHOOD</item>
+        <item>PLACE_OF_WORSHIP</item>
+        <item>POLITICAL</item>
+        <item>POINT_OF_INTEREST</item>
+        <item>POST_BOX</item>
+        <item>POSTAL_CODE_PREFIX</item>
+        <item>POSTAL_CODE_SUFFIX</item>
+        <item>POSTAL_TOWN</item>
+        <item>PREMISE</item>
+        <item>ROOM</item>
+        <item>ROUTE</item>
+        <item>STREET_ADDRESS</item>
+        <item>STREET_NUMBER</item>
+        <item>SUBLOCALITY</item>
+        <item>SUBLOCALITY_LEVEL_5</item>
+        <item>SUBLOCALITY_LEVEL_4</item>>
+        <item>SUBLOCALITY_LEVEL_3</item>
+        <item>SUBLOCALITY_LEVEL_2</item>
+        <item>SUBLOCALITY_LEVEL_1</item>
+        <item>SUBPREMISE</item>
+        <item>LOCALITY</item>
+        <item>POSTAL_CODE</item>
+        <item>COUNTRY</item>
+    </string-array>
+    <string-array name="places">
+        <item>Accounting</item>
+        <item>Airport</item>
+        <item>Amusement Park</item>
+        <item>Aquarium</item>
+        <item>Art Gallery</item>
+        <item>Atm</item>
+        <item>Bakery</item>
+        <item>Bank</item>
+        <item>Bar</item>
+        <item>Beauty Salon</item>
+        <item>Bicycle Store</item>
+        <item>Book Store</item>
+        <item>Bowling Alley</item>
+        <item>Bus Station</item>
+        <item>Cafe</item>
+        <item>Campground</item>
+        <item>Car Dealer</item>
+        <item>Car Rental</item>
+        <item>Car Repair</item>
+        <item>Car Wash</item>
+        <item>Casino</item>
+        <item>Cemetery</item>
+        <item>Church</item>
+        <item>City Hall</item>
+        <item>Clothing Store</item>
+        <item>Convenience Store</item>
+        <item>Courthouse</item>
+        <item>Dentist</item>
+        <item>Department Store</item>
+        <item>Doctor</item>
+        <item>Drugstore</item>
+        <item>Electrician</item>
+        <item>Electronics Store</item>
+        <item>Embassy</item>
+        <item>Fire Station</item>
+        <item>Florist</item>
+        <item>Funeral Home</item>
+        <item>Furniture Store</item>
+        <item>Gas Station</item>
+        <item>Gym</item>
+        <item>Hair Care</item>
+        <item>Hardware Store</item>
+        <item>Hindu Temple</item>
+        <item>Home Goods Store</item>
+        <item>Hospital</item>
+        <item>Insurance Agency</item>
+        <item>Jewelry Store</item>
+        <item>Laundry</item>
+        <item>Lawyer</item>
+        <item>Library</item>
+        <item>Liquor Store</item>
+        <item>Local Government Office</item>
+        <item>Locksmith</item>
+        <item>Lodging</item>
+        <item>Meal Delivery</item>
+        <item>Meal Takeaway</item>
+        <item>Mosque</item>
+        <item>Movie Rental</item>
+        <item>Movie Theater</item>
+        <item>Moving Company</item>
+        <item>Museum</item>
+        <item>Night Club</item>
+        <item>Painter</item>
+        <item>Park</item>
+        <item>Parking</item>
+        <item>Pet Store</item>
+        <item>Pharmacy</item>
+        <item>Physiotherapist</item>
+        <item>Plumber</item>
+        <item>Police</item>
+        <item>Post Office</item>
+        <item>Primary School</item>
+        <item>Real Estate Agency</item>
+        <item>Restaurant</item>
+        <item>Roofing Contractor</item>
+        <item>Rv Park</item>
+        <item>School</item>
+        <item>Secondary School</item>
+        <item>Shoe Store</item>
+        <item>Shopping Mall</item>
+        <item>Spa</item>
+        <item>Stadium</item>
+        <item>Storage</item>
+        <item>Store</item>
+        <item>Subway Station</item>
+        <item>Supermarket</item>
+        <item>Synagogue</item>
+        <item>Taxi Stand</item>
+        <item>Tourist Attraction</item>
+        <item>Train Station</item>
+        <item>Transit Station</item>
+        <item>Travel Agency</item>
+        <item>University</item>
+        <item>Veterinary Care</item>
+        <item>Zoo</item>
+        <item>Administrative Area Level 1</item>
+        <item>Administrative Area Level 2</item>
+        <item>Administrative Area Level 3</item>
+        <item>Administrative Area Level 4</item>
+        <item>Administrative Area Level 5</item>
+        <item>Colloquial Area</item>
+        <item>Establishment</item>
+        <item>Finance</item>
+        <item>Floor</item>
+        <item>Food</item>
+        <item>General Contractor</item>
+        <item>Geocode</item>
+        <item>Health</item>
+        <item>Intersection</item>
+        <item>Locality</item>
+        <item>Natural Feature</item>
+        <item>Neighborhood</item>
+        <item>Place Of Worship</item>
+        <item>Political</item>
+        <item>Point Of Interest</item>
+        <item>Post Box</item>
+        <item>Postal Code Prefix</item>
+        <item>Postal Code Suffix</item>
+        <item>Postal Town</item>
+        <item>Premise</item>
+        <item>Room</item>
+        <item>Route</item>
+        <item>Street Address</item>
+        <item>Street Number</item>
+        <item>Sublocality</item>
+        <item>Sublocality Level 5</item>
+        <item>Sublocality Level 4</item>
+        <item>Sublocality Level 3</item>
+        <item>Sublocality Level 2</item>
+        <item>Sublocality Level 1</item>
+        <item>Subpremise</item>
+        <item>Locality</item>
+        <item>Postal Code</item>
+        <item>Country</item>
+    </string-array>
+</resources>

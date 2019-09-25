@@ -13,8 +13,8 @@ import com.saivo.recommendo.network.resquest.ITokenService
 import com.saivo.recommendo.network.resquest.IUserService
 import com.saivo.recommendo.util.network.Connection
 import com.saivo.recommendo.util.network.IConnection
-import com.saivo.recommendo.view.viewable.auth.AuthViewModelFactory
-import com.saivo.recommendo.view.viewable.user.UserViewModelFactory
+import com.saivo.recommendo.view.viewmodel.auth.AuthViewModelFactory
+import com.saivo.recommendo.view.viewmodel.user.UserViewModelFactory
 import kotlinx.coroutines.InternalCoroutinesApi
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
