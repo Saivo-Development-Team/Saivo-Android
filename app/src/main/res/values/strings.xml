@@ -64,4 +64,5 @@
     <string name="navigation_drawer_close">Close Side Navigation</string>
     <string name="recommendations">Recommendations</string>
     <string name="recommendation_image">Recommendation Image</string>
+    <string name="search">Search</string>
 </resources>

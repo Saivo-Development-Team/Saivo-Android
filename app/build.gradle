@@ -31,12 +31,10 @@ android {
             minifyEnabled false
             resValue("string", "maps_key", MAP_KEY)
             buildConfigField('String', "BaseUrl", API_HOST)
-            buildConfigField('String', "BearerToken", ACCESS_TOKEN)
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
         debug {
-            buildConfigField('String', "BearerToken", ACCESS_TOKEN)
             buildConfigField('String', "BaseUrl", API_HOST)
             resValue("string", "maps_key", MAP_KEY)
             resValue("string", "PORT_NUMBER", "8888")
@@ -113,7 +111,7 @@ dependencies {
 
     /* Glide */
     implementation "com.github.bumptech.glide:glide:$glide_version"
-    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
 
     testImplementation 'junit:junit:4.13-beta-3'
     testImplementation "androidx.room:room-testing:$room_version"
