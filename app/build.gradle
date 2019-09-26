@@ -31,12 +31,10 @@ android {
             minifyEnabled false
             resValue("string", "maps_key", MAP_KEY)
             buildConfigField('String', "BaseUrl", API_HOST)
-            buildConfigField('String', "BearerToken", ACCESS_TOKEN)
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
         debug {
-            buildConfigField('String', "BearerToken", ACCESS_TOKEN)
             buildConfigField('String', "BaseUrl", API_HOST)
             resValue("string", "maps_key", MAP_KEY)
             resValue("string", "PORT_NUMBER", "8888")
