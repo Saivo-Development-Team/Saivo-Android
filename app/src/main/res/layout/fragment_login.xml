@@ -5,6 +5,7 @@
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:fillViewport="true"
+            android:background="@drawable/map_background"
 >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,16 +13,6 @@
             android:layout_height="wrap_content"
     >
 
-        <ImageView
-                android:id="@+id/map_background"
-
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:src="@drawable/map_background"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
                 android:id="@+id/login_profile_image"

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+                android:id="@+id/preferences"
+                android:icon="@drawable/ic_thumbs_up_down"
+                android:title="@string/preferences" />
+        <item
+                android:id="@+id/recommendations"
+                android:icon="@drawable/ic_notifications_active"
+                android:title="@string/recommendations" />
+    </group>
+    <item android:title="@string/settings">
+        <menu>
+            <item
+                    android:id="@+id/account_settings"
+                    android:icon="@drawable/ic_account_circle"
+                    android:title="@string/account" />
+            <item
+                    android:id="@+id/location_settings"
+                    android:icon="@drawable/ic_my_location"
+                    android:title="@string/location" />
+            <item
+                    android:id="@+id/settings"
+                    android:icon="@drawable/ic_settings"
+                    android:title="@string/all_settings" />
+        </menu>
+    </item>
+</menu>

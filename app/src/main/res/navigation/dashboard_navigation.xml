@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/dashboard_navigation"
+        app:startDestination="@id/recommendations">
+
+    <fragment
+            android:id="@+id/recommendations"
+            android:name="com.saivo.recommendo.view.fragment.pages.RecommendationsFragment"
+            android:label="Recommendations"
+            tools:layout="@layout/fragment_recommendations" />
+    <fragment
+            android:id="@+id/preferences"
+            android:name="com.saivo.recommendo.view.fragment.pages.PreferencesFragment"
+            android:label="Preferences"
+            tools:layout="@layout/fragment_preferences" />
+    <fragment
+            android:id="@+id/settings"
+            android:name="com.saivo.recommendo.view.fragment.pages.SettingsFragment"
+            android:label="Settings" />
+</navigation>

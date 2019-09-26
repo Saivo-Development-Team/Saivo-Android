@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory android:title="Location">
+        <SwitchPreference
+                android:defaultValue="true"
+                android:key="USE_LOCATION"
+                android:summary="Allow the app to use your Device's Location"
+                android:title="Use Device Location" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Unit System">
+        <SwitchPreference
+                android:defaultValue="true"
+                android:disableDependentsState="true"
+                android:key="LOCATION_UNIT_SYSTEM"
+                android:summary="Use the current Location's Unit System"
+                android:title="Location Unit System"
+                app:disableDependentsState="true"/>
+        <ListPreference
+                android:key="UNIT_SYSTEM"
+                android:summary="System you prefer: %s"
+                android:title="Select Unit System"
+                android:defaultValue="METRIC"
+                android:entryValues="@array/unit_system_values"
+                android:entries="@array/unit_system_entries"
+                android:dependency="LOCATION_UNIT_SYSTEM"/>
+    </PreferenceCategory>
+</PreferenceScreen>
