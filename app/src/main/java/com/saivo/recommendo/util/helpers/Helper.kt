@@ -27,10 +27,6 @@ fun toastMessage(context: Context?, message: String = "", duration: Int = 0) {
     Toast.makeText(context, message, duration).show()
 }
 
-fun createBCrypt(cost: Int = BCrypt.MIN_COST, secret: CharArray): String {
-    return BCrypt.withDefaults().hashToString(cost, secret)
-}
-
 fun base64encode(byteArray: ByteArray): String {
     return Base64.encodeToString(byteArray, Base64.NO_WRAP)
 }
@@ -38,10 +34,6 @@ fun base64encode(byteArray: ByteArray): String {
 fun createByteArray(string: String): ByteArray {
     println(string)
    return string.toByteArray()
-}
-
-fun createCharArray(string: String): CharArray {
-    return string.toCharArray()
 }
 
 fun createUUID(): String {

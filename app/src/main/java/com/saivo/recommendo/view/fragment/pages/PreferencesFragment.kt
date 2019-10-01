@@ -1,27 +1,23 @@
 package com.saivo.recommendo.view.fragment.pages
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.saivo.recommendo.R
-import com.saivo.recommendo.util.helpers.toastMessage
-import com.saivo.recommendo.view.main.page.DataSource
-import com.saivo.recommendo.view.main.page.RecyclerItem
-import com.saivo.recommendo.view.main.page.RecyclerViewAdapter
+import com.saivo.recommendo.view.fragment.dialog.PreferenceDialogFragment
+import com.saivo.recommendo.view.objects.RecyclerAdapter
+import com.saivo.recommendo.view.objects.preferences.PreCard
 import kotlinx.android.synthetic.main.fragment_preferences.*
-import kotlinx.android.synthetic.main.fragment_preferences.view.*
-
 
 class PreferencesFragment : Fragment() {
 
-    private lateinit var recyclerAdapter: RecyclerViewAdapter
-
-
+    private val preferenceDialogFragment = PreferenceDialogFragment()
+    private val recyclerAdapter = RecyclerAdapter(PreCard::class.java)
+  
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,56 +32,48 @@ class PreferencesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var input = ""
-        initRecyclerView()
-        addDataSet()
-
-        preference_input.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {
-            }
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-                input = p0.toString()
-            }
-
-        })
-        //code for when Add Button is clicked
-        add_button.setOnClickListener {
-            toastMessage(this@PreferencesFragment.context, "Your $input Preference has been added")
-            test(input)
-
-
-        }
-
-
-        //code for when Remove Button is clicked
-        remove_button.setOnClickListener {
-            toastMessage(this@PreferencesFragment.context, "Your $input Preference has been removed")
-            DataSource.getData().apply { forEach { if (it.preference.equals(input)) remove(it) } }
-        }
-
-
-    }
-
-    private fun addDataSet() {
-        val data = DataSource.getData()
-        recyclerAdapter.submitList(data)
-    }
-
-    private fun initRecyclerView() {
-        recycler_preferences.apply {
-            recycler_preferences.layoutManager =
-                LinearLayoutManager(context)  // May need to be @preferencesfragment
-            recyclerAdapter = RecyclerViewAdapter()
+        preference_recycler_view.apply {
+            layoutManager = LinearLayoutManager(this@PreferencesFragment.context)
             adapter = recyclerAdapter
         }
+        recyclerAdapter.addToListItems(getData())
 
+        floating_action_button.setOnClickListener {
+            preferenceDialogFragment.show(
+                (activity as AppCompatActivity).supportFragmentManager,
+                "PreferenceBottomSheet"
+            )
+        }
     }
 
+    private fun getData(): ArrayList<PreCard> {
+        val data = arrayListOf<PreCard>()
+        data.add(
+            PreCard(
+                likes = "Coding",
+                dislikes = "Driving",
+                category = "Activity",
+                description = "In my Free Time I code, but I hate it when I have to Drive"
+            )
+        )
+        data.add(
+            PreCard(
+                likes = "Pizza",
+                dislikes = "Green Beans",
+                category = "Food",
+                description = "So am a Foodie, and Love to it all kings of things, just not Green Beans"
+            )
+        )
+        data.add(
+            PreCard(
+                likes = "12345678901234567",
+                dislikes = "12345678901234567",
+                category = "Numbers",
+                description = "So am a Number guys, and Love to tyr new things with numbers, yet I still fails maths LOL"
+            )
+        )
+        return data
+    }
 }
 
 
