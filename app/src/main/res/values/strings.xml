@@ -36,7 +36,7 @@
     <string name="user_name">User Name</string>
     <string name="new_password">New Password</string>
     <string name="profile_image">Profile Image</string>
-    <string name="enter_your_account_email">Enter your Account Email</string>
+    <string name="enter_account_number_email">Enter Your Email &amp; Number</string>
 
     <string name="email_error">Email Error</string>
     <string name="password_error">Password Error</string>
@@ -65,4 +65,11 @@
     <string name="recommendations">Recommendations</string>
     <string name="recommendation_image">Recommendation Image</string>
     <string name="search">Search</string>
+    <string name="preference_icon">Preference Icon</string>
+    <string name="description">Description:</string>
+    <string name="category">Category:</string>
+    <string name="preference">Preferences:</string>
+    <string name="save">Save</string>
+    <string name="confirm">Confirm</string>
+    <string name="phone_number">Phone Number</string>
 </resources>
