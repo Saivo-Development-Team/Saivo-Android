@@ -1,6 +1,8 @@
-package com.saivo.recommendo.view.`object`
+package com.saivo.recommendo.view.objects.recommendations
 
-class RecoCard(
+import com.saivo.recommendo.view.objects.IRecyclerItem
+
+data class RecCard(
     val info: String,
     val users: Int,
     val title: String,
@@ -11,4 +13,4 @@ class RecoCard(
     val details: String,
     val distance: String,
     val category: String
-)
+): IRecyclerItem

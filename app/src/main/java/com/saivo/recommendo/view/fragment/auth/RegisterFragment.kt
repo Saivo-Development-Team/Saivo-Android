@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.saivo.recommendo.R
 import com.saivo.recommendo.network.access.IUserDataSource
 import com.saivo.recommendo.util.helpers.*
-import com.saivo.recommendo.util.helpers.Status.REGISTRATION_SUCCESSFUL
+import com.saivo.recommendo.util.helpers.REGISTRATION_SUCCESSFUL
 import com.saivo.recommendo.view.fragment.CoroutineFragment
 import com.saivo.recommendo.view.viewmodel.auth.AuthViewModel
 import com.saivo.recommendo.view.viewmodel.auth.AuthViewModelFactory
