@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.saivo.recommendo.R
 import com.saivo.recommendo.network.access.IUserDataSource
 import com.saivo.recommendo.util.helpers.*
-import com.saivo.recommendo.util.helpers.LOGIN_SUCCESSFUL
-import com.saivo.recommendo.util.helpers.LOGIN_UNSUCCESSFUL
+import com.saivo.recommendo.util.helpers.Status.LOGIN_SUCCESSFUL
+import com.saivo.recommendo.util.helpers.Status.LOGIN_UNSUCCESSFUL
 import com.saivo.recommendo.view.fragment.CoroutineFragment
 import com.saivo.recommendo.view.viewmodel.auth.AuthViewModel
 import com.saivo.recommendo.view.viewmodel.auth.AuthViewModelFactory

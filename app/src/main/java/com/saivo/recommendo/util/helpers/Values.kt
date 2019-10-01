@@ -1,9 +1,0 @@
-package com.saivo.recommendo.util.helpers
-
-
-const val DEVICE_ID = 0
-const val TOKEN_ID = DEVICE_ID
-const val CLIENT_ID = DEVICE_ID
-const val LOGIN_SUCCESSFUL = "LOGIN_SUCCESSFUL"
-const val LOGIN_UNSUCCESSFUL = "LOGIN_UNSUCCESSFUL"
-const val REGISTRATION_SUCCESSFUL = "REGISTRATION_SUCCESSFUL"

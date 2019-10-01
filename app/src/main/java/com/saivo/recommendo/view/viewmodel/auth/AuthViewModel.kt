@@ -3,19 +3,18 @@ package com.saivo.recommendo.view.viewmodel.auth
 import android.view.View
 import android.widget.EditText
 import androidx.lifecycle.ViewModel
-import androidx.navigation.Navigation
-import com.saivo.recommendo.R
 import com.saivo.recommendo.data.objects.LoginCredentials
 import com.saivo.recommendo.data.objects.RegisterCredentials
+import androidx.navigation.Navigation
+import com.saivo.recommendo.R
 import com.saivo.recommendo.util.helpers.formNotEmpty
 import com.saivo.recommendo.util.helpers.isEmail
 import com.saivo.recommendo.util.helpers.isPassword
 
 
-class AuthViewModel : ViewModel(), IAuthRegisterUser, IAuthLoginUser, IAuthRestPassword {
+class AuthViewModel : ViewModel(), IAuthRegisterUser, IAuthLoginUser {
     private lateinit var loginCredentials: LoginCredentials
     private lateinit var registerCredentials: RegisterCredentials
-    private lateinit var otpNumberValue: String
 
     override fun emailValidation(editText: EditText, cb: (boolean: Boolean) -> Unit) {
         editText.text.toString().trim().also { e ->
@@ -30,33 +29,20 @@ class AuthViewModel : ViewModel(), IAuthRegisterUser, IAuthLoginUser, IAuthRestP
 
     override fun passwordValidation(
         editText: EditText,
-        cb: ((boolean: Boolean) -> Unit)?,
-        form: Array<EditText>?
-    ): Boolean {
+        cb: (boolean: Boolean) -> Unit,
+        form: Array<EditText>
+    ) {
         editText.text.toString().trim().also { p ->
             isPassword(p).also {
                 when {
-                    p.length <= 8 -> cb?.invoke(false)
+                    p.length <= 8 -> cb(false)
                     p.length >= 8 -> if (!it) {
                         editText.error = "Try a Stronger ${editText.hint} e.g [ P@ssword5 ]"
-                        cb?.invoke(false)
-                    } else form?.apply { cb?.invoke(formNotEmpty(this)) }
+                        cb(false)
+                    } else cb(formNotEmpty(form))
                 }
-                return it
             }
         }
-    }
-
-    override fun setNewOTPNumber(pin: String) {
-        otpNumberValue = pin
-    }
-
-    override fun checkOTPMatch(pin: String): Boolean {
-        return otpNumberValue == pin
-    }
-
-    override fun getOTPNumber(): String {
-        return otpNumberValue
     }
 
     override fun userLoggedIn(view: View) {
@@ -73,10 +59,6 @@ class AuthViewModel : ViewModel(), IAuthRegisterUser, IAuthLoginUser, IAuthRestP
 
     override fun userRegistered(view: View) {
         Navigation.findNavController(view).navigate(R.id.action_register_to_home)
-    }
-
-    override fun popToLogin(view: View) {
-        Navigation.findNavController(view).navigate(R.id.action_reset_password_pop)
     }
 
     override fun setRegisterCredentials(registerCredentials: RegisterCredentials) {

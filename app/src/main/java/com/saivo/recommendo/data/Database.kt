@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.Database as RDatabase
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.saivo.recommendo.data.access.TokenDao
 import com.saivo.recommendo.data.access.ClientDao
 import com.saivo.recommendo.data.access.UserDao
@@ -13,6 +14,7 @@ import com.saivo.recommendo.data.model.domain.Recommendation
 import com.saivo.recommendo.data.model.domain.User
 import com.saivo.recommendo.data.model.infrastructure.Token
 import com.saivo.recommendo.data.model.infrastructure.Client
+import com.saivo.recommendo.util.helpers.DateTimeConverter
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.internal.synchronized
 

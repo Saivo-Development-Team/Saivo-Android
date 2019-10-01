@@ -42,16 +42,7 @@
             android:id="@+id/reset_password"
             android:name="com.saivo.recommendo.view.fragment.auth.ResetPasswordFragment"
             android:label="fragment_reset_password"
-            tools:layout="@layout/fragment_reset_password">
-        <action
-                android:id="@+id/action_reset_password_pop"
-                app:destination="@+id/login"
-                app:enterAnim="@anim/fragment_close_enter"
-                app:popEnterAnim="@anim/fragment_fade_enter"
-                app:popExitAnim="@anim/fragment_fast_out_extra_slow_in"
-                app:popUpTo="@+id/reset_password"
-                app:popUpToInclusive="true" />
-    </fragment>
+            tools:layout="@layout/fragment_reset_password"/>
     <activity
             android:id="@+id/home"
             android:name="com.saivo.recommendo.view.HomeActivity"

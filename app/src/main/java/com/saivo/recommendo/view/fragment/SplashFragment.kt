@@ -2,7 +2,6 @@ package com.saivo.recommendo.view.fragment
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,10 +47,9 @@ class SplashFragment : CoroutineFragment(), KodeinAware {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initClientWithToken()
-            .invokeOnCompletion {
-                Navigation.findNavController(view).navigate(R.id.to_login_action)
-            }
+        initClientWithToken().invokeOnCompletion {
+            Navigation.findNavController(view).navigate(R.id.to_login_action)
+        }
     }
 
     private fun setLoadingText(text: String) {
@@ -63,29 +61,23 @@ class SplashFragment : CoroutineFragment(), KodeinAware {
     private fun initClientWithToken() = launch(IO) {
         runCatching {
             val secret = createUUID()
-            return@runCatching token(tokenDao, client(clientDao) { clientDao ->
+            token(tokenDao, client(clientDao) { clientDao ->
                 Client(clientSecret = secret, clientId = registerClient(secret)).also {
                     clientDao.updateClientCredentials(it.apply { clientSecret = it.clientSecret })
                 }
-            }) { tokenDao, client -> createAccessToken(tokenDao, client) }
-
-        }.onFailure {
-            Log.e("AuthFailure", it.message.toString())
-        }.onSuccess {
-            Log.e("AuthSuccess", it)
+            }) { c, t -> createAccessToken(t, c) }
         }
     }
 
-    private suspend fun createAccessToken(tokenDao: TokenDao, client: Client): String =
-        withContext(IO) {
-            setLoadingText("Getting Access")
-            retrofit<ITokenService>(connection = connection).getTokenByClientAsync(
-                authentication = basic(client.clientId, client.clientSecret),
-                grant_type = "client_credentials"
-            ).await().apply {
-                tokenDao.updateTokenData(this)
-            }.accessToken
-        }
+    private suspend fun createAccessToken(tokenDao: TokenDao, client: Client): String = withContext(IO) {
+        setLoadingText("Getting Access")
+        retrofit<ITokenService>(connection = connection).getTokenByClientAsync(
+            authentication = basic(client.clientId, client.clientSecret),
+            grant_type = "client_credentials"
+        ).await().apply {
+            tokenDao.updateTokenData(this)
+        }.accessToken
+    }
 
     private suspend fun registerClient(secret: String): String = withContext(IO) {
         setLoadingText("Registering Device")

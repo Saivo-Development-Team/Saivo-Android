@@ -11,6 +11,4 @@ interface IUserDataSource {
     suspend fun getUserDataAsync(Id: String): Response
     suspend fun loginUserAsync(credentials: LoginCredentials) : Response
     suspend fun registerUserAsync(credentials: RegisterCredentials) : Response
-    suspend fun restUserPassword(password: String, email: String)
-    suspend fun getOTPFromServer(number: String, email: String): String
 }
