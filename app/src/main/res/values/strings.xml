@@ -64,6 +64,7 @@
     <string name="navigation_drawer_close">Close Side Navigation</string>
     <string name="recommendations">Recommendations</string>
     <string name="recommendation_image">Recommendation Image</string>
+    <string name="notification_image">Notification Image</string>
     <string name="add">Add Preference</string>
     <string name="enter_preferences">enterPreferences</string>
     <string name="remove">Remove Preference</string>
