@@ -17,13 +17,17 @@ class PreferencesFragment : Fragment() {
 
     private val preferenceDialogFragment = PreferenceDialogFragment()
     private val recyclerAdapter = RecyclerAdapter(PreCard::class.java)
-
+  
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_preferences, container, false)
+    }
+
+    fun test(test: String) {
+        DataSource.setData(test)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -71,3 +75,7 @@ class PreferencesFragment : Fragment() {
         return data
     }
 }
+
+
+
+

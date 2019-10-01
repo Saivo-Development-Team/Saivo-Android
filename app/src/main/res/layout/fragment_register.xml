@@ -13,6 +13,18 @@
             tools:context=".view.fragment.auth.RegisterFragment"
     >
 
+        <ImageView
+                android:id="@+id/map_background"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/map_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
         <EditText
                 android:id="@+id/register_firstname_editText"
                 android:layout_width="0dp"
@@ -131,6 +143,41 @@
                 android:id="@+id/GuidelineRight"
                 app:layout_constraintGuide_end="50dp"
         />
+
+        <TextView
+                android:id="@+id/welcome_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:text="Welcome new user!"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/splash_progress_bar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/logo_image"
+                app:layout_constraintVertical_bias="0.9" />
+
+        <ImageView
+                android:id="@+id/logo_image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:contentDescription="@string/saivo_logo_map_marker"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:src="@drawable/logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/map_background"
+                app:layout_constraintVertical_bias="0.055"
+                app:layout_constraintVertical_chainStyle="packed" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
 <!--</layout>-->

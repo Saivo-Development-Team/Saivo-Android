@@ -72,4 +72,7 @@
     <string name="save">Save</string>
     <string name="confirm">Confirm</string>
     <string name="phone_number">Phone Number</string>
+    <string name="add">Add Preference</string>
+    <string name="enter_preferences">enterPreferences</string>
+    <string name="remove">Remove Preference</string>
 </resources>

@@ -5,12 +5,15 @@
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:fillViewport="true"
+            android:background="@drawable/map_background"
 >
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
     >
+
+
         <ImageView
                 android:id="@+id/login_profile_image"
                 android:layout_width="160dp"
@@ -135,5 +138,6 @@
                 android:id="@+id/GuidelineRight"
                 app:layout_constraintGuide_end="50dp"
         />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
