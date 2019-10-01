@@ -8,9 +8,9 @@ interface IToken {
         suspend operator fun invoke(
             tokenDao: TokenDao,
             client: Client,
-            createTokenCallback: suspend (client: Client, tokenDao: TokenDao) -> String
+            createTokenCallback: suspend (tokenDao: TokenDao, client: Client) -> String
         ): String {
-            return tokenDao.getAccessToken() ?: createTokenCallback(client, tokenDao)
+            return tokenDao.getAccessToken() ?: createTokenCallback(tokenDao, client)
         }
     }
 }

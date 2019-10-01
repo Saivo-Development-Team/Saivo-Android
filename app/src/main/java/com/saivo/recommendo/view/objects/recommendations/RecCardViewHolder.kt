@@ -10,7 +10,7 @@ import com.saivo.recommendo.R
 import kotlinx.android.synthetic.main.recommendation_card.view.*
 
 class RecCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    private val info = itemView.info!!
+    private val info = itemView.recommendation_info_text!!
     private val users = itemView.users
     private val title = itemView.title
     private val image = itemView.image
@@ -19,7 +19,7 @@ class RecCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val rating = itemView.rating
     private val details = itemView.details
     private val distance = itemView.distance
-    private val category = itemView.category
+    private val category = itemView.recommendation_category
 
     companion object {
         operator fun invoke(root: ViewGroup): RecyclerView.ViewHolder {

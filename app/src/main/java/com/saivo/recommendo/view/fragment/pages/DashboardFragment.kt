@@ -2,10 +2,8 @@ package com.saivo.recommendo.view.fragment.pages
 
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.os.Bundle
 import android.view.*
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -13,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI.*
+import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.saivo.recommendo.R
 import com.saivo.recommendo.view.fragment.CoroutineFragment
 import com.saivo.recommendo.view.viewmodel.user.IUserViewModel
@@ -39,7 +37,6 @@ class DashboardFragment : CoroutineFragment(), KodeinAware {
     private lateinit var appCompatActivity: AppCompatActivity
     private lateinit var dashboardNavController: NavController
 
-    @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

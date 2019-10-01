@@ -3,6 +3,8 @@ package com.saivo.recommendo.view.objects
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.saivo.recommendo.view.objects.preferences.PreCard
+import com.saivo.recommendo.view.objects.preferences.PreCardViewHolder
 import com.saivo.recommendo.view.objects.recommendations.RecCard
 import com.saivo.recommendo.view.objects.recommendations.RecCardViewHolder
 
@@ -17,6 +19,7 @@ class RecyclerAdapter<T : IRecyclerItem>(private val clazz: Class<T>) :
     ): ViewHolder {
         return when {
             checkType<RecCard>() -> RecCardViewHolder.invoke(parent)
+            checkType<PreCard>() -> PreCardViewHolder.invoke(parent)
             else -> throw Exception("${clazz.name} is not a valid RecyclerItem")
         }
     }
@@ -36,6 +39,7 @@ class RecyclerAdapter<T : IRecyclerItem>(private val clazz: Class<T>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         when (holder) {
             is RecCardViewHolder -> return holder.bind(items[position] as RecCard)
+            is PreCardViewHolder -> return holder.bind(items[position] as PreCard)
         }
     }
 }
