@@ -3,6 +3,8 @@ package com.saivo.recommendo.view.objects
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.saivo.recommendo.view.objects.notifications.NotifCard
+import com.saivo.recommendo.view.objects.notifications.NotifCardViewHolder
 import com.saivo.recommendo.view.objects.preferences.PreCard
 import com.saivo.recommendo.view.objects.preferences.PreCardViewHolder
 import com.saivo.recommendo.view.objects.recommendations.RecCard
@@ -20,6 +22,7 @@ class RecyclerAdapter<T : IRecyclerItem>(private val clazz: Class<T>) :
         return when {
             checkType<RecCard>() -> RecCardViewHolder.invoke(parent)
             checkType<PreCard>() -> PreCardViewHolder.invoke(parent)
+            checkType<NotifCard>() -> NotifCardViewHolder.invoke(parent)
             else -> throw Exception("${clazz.name} is not a valid RecyclerItem")
         }
     }
