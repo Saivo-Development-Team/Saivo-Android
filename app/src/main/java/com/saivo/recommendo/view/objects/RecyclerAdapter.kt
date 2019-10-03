@@ -43,6 +43,7 @@ class RecyclerAdapter<T : IRecyclerItem>(private val clazz: Class<T>) :
         when (holder) {
             is RecCardViewHolder -> return holder.bind(items[position] as RecCard)
             is PreCardViewHolder -> return holder.bind(items[position] as PreCard)
+            is NotifCardViewHolder -> return holder.bind(items[position] as NotifCard)
         }
     }
 }
