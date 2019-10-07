@@ -11,16 +11,25 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.saivo.recommendo.R
+import com.saivo.recommendo.network.access.notification.INotificationDataSource
+import com.saivo.recommendo.view.fragment.CoroutineFragment
 import com.saivo.recommendo.view.objects.RecyclerAdapter
 import com.saivo.recommendo.view.objects.notifications.NotifCard
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.fragment_notifications.*
+import kotlinx.coroutines.launch
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
 /**
  * A simple [Fragment] subclass.
  */
-class NotificationsFragment : Fragment() {
+class NotificationsFragment : CoroutineFragment(), KodeinAware {
+    override val kodein by closestKodein()
 
+    private val notificationDataSource: INotificationDataSource by instance()
     private val recyclerAdapter = RecyclerAdapter(NotifCard::class.java)
 
     override fun onCreateView(
@@ -37,6 +46,7 @@ class NotificationsFragment : Fragment() {
             layoutManager = LinearLayoutManager(this@NotificationsFragment.context)
             adapter = recyclerAdapter
             recyclerAdapter.addToListItems(getData())
+
         }
 
         setupMaterialToolbar()
@@ -57,40 +67,26 @@ class NotificationsFragment : Fragment() {
     }
 
     private fun getData(): ArrayList<NotifCard> {
+
+
         val data = arrayListOf<NotifCard>()
-        data.add(
-            NotifCard(
-                rated = "Recommended based off park rating",
-                title = "Claremont Park",
-                rating ="4,7" ,
-                stars = 4.7,
-                users = 55,
-                image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBC7oKR9Y15uxvQjrkYNnFKFNaa-Rv_nSbQGfU5X3UrzOWirF2"
-            )
+        launch {
+            notificationDataSource.getNotificationForUserAsync("Du").forEach {
+                it.apply {
+                    data.add(
+                        NotifCard(
+                            rated = rated,
+                            title = title,
+                            rating =rating,
+                            stars = stars,
+                            users = users,
+                            image = image
+                        )
+                    )
+                }
 
-        )
-        data.add(
-            NotifCard(
-                rated = "Recommended based off restaurant rating",
-                title = "Tiger's Milk",
-                rating ="4,1" ,
-                stars = 4.1,
-                users = 112,
-                image = "https://tigersmilk.co.za/wp-content/uploads/2018/03/001-2.jpg"
-            )
-
-        )
-        data.add(
-            NotifCard(
-                rated = "Recommended based off monument rating",
-                title = "Rhodes Memorial",
-                rating ="4,0" ,
-                stars = 4.0,
-                users = 150,
-                image = "https://media-cdn.tripadvisor.com/media/photo-s/0d/a3/90/71/view-from-rhodes-memorial.jpg"
-            )
-
-        )
+            }
+        }
         return data
     }
 }

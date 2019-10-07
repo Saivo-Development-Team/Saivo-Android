@@ -9,6 +9,7 @@ import com.saivo.recommendo.network.INetworkService
 import com.saivo.recommendo.network.access.IUserDataSource
 import com.saivo.recommendo.network.access.user.UserDataSource
 import com.saivo.recommendo.network.resquest.IClientService
+import com.saivo.recommendo.network.resquest.INotificationService
 import com.saivo.recommendo.network.resquest.ITokenService
 import com.saivo.recommendo.network.resquest.IUserService
 import com.saivo.recommendo.util.network.Connection
@@ -41,7 +42,7 @@ class Recommendo : Application(), KodeinAware {
         bind<IUserService>() with singleton { INetworkService.Companion<IUserService>(instance(), instance()) }
         bind<ITokenService>() with singleton { INetworkService.Companion<ITokenService>(instance(), instance()) }
         bind<IClientService>() with singleton { INetworkService.Companion<IClientService>(instance(), instance()) }
-
+        bind<INotificationService>() with singleton { INetworkService.Companion<INotificationService>(instance(), instance()) }
         bind<IUserDataSource>() with singleton { UserDataSource(instance()) }
 
         bind<IUserRepository>() with singleton { UserRepository(instance(), instance()) }
