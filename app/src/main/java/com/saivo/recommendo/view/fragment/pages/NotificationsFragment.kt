@@ -38,10 +38,7 @@ class NotificationsFragment : Fragment() {
             adapter = recyclerAdapter
             recyclerAdapter.addToListItems(getData())
         }
-
         setupMaterialToolbar()
-
-
     }
 
     private fun setupMaterialToolbar() {
