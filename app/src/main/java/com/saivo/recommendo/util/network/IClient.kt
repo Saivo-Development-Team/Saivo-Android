@@ -9,7 +9,7 @@ interface IClient {
             clientDao: ClientDao,
             createClientCallback: suspend (clientDao: ClientDao) -> Client
         ): Client {
-            return clientDao.getClientCredentials() ?: createClientCallback(clientDao)
+            return clientDao.getClient() ?: createClientCallback(clientDao)
         }
     }
 }

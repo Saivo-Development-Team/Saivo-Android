@@ -2,7 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/recommendations_card_view"
+        android:id="@+id/notifications_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -15,13 +15,13 @@
             android:layout_height="match_parent">
 
         <ImageView
-                android:id="@+id/image"
+                android:id="@+id/notification_image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:contentDescription="@string/recommendation_image"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/title"
+                app:layout_constraintEnd_toStartOf="@+id/notification_title"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -29,35 +29,35 @@
                 tools:src="@drawable/johannesburg" />
 
         <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/title"
+                android:id="@+id/notification_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@+id/rating"
+                app:layout_constraintBottom_toTopOf="@+id/notification_rating"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/image"
+                app:layout_constraintStart_toEndOf="@id/notification_image"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
                 tools:targetApi="o"
                 tools:text="11 Things you have to do when you visit Johannesburg" />
 
         <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/rating"
+                android:id="@+id/notification_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/recommendation_category"
-                app:layout_constraintStart_toEndOf="@id/image"
-                app:layout_constraintTop_toBottomOf="@id/title"
+                app:layout_constraintStart_toEndOf="@id/notification_image"
+                app:layout_constraintTop_toBottomOf="@id/notification_title"
                 tools:text="4,2" />
 
         <RatingBar
 
-                android:id="@+id/stars"
+                android:id="@+id/notification_stars"
                 style="@android:style/Widget.Material.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,21 +67,21 @@
                 android:progressTintMode="src_in"
                 android:secondaryProgressTint="#E5E500"
                 android:stepSize="0.1"
-                app:layout_constraintBottom_toBottomOf="@id/rating"
-                app:layout_constraintStart_toEndOf="@id/rating"
-                app:layout_constraintTop_toTopOf="@id/rating"
+                app:layout_constraintBottom_toBottomOf="@id/notification_rating"
+                app:layout_constraintStart_toEndOf="@id/notification_rating"
+                app:layout_constraintTop_toTopOf="@id/notification_rating"
                 tools:rating="4.2" />
 
         <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/users"
+                android:id="@+id/notification_users"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@id/stars"
-                app:layout_constraintStart_toEndOf="@id/stars"
-                app:layout_constraintTop_toTopOf="@id/stars"
+                app:layout_constraintBottom_toBottomOf="@id/notification_stars"
+                app:layout_constraintStart_toEndOf="@id/notification_stars"
+                app:layout_constraintTop_toTopOf="@id/notification_stars"
                 tools:text="(45)" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -92,8 +92,8 @@
                 android:textColor="@android:color/darker_gray"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/status"
-                app:layout_constraintStart_toEndOf="@+id/image"
-                app:layout_constraintTop_toBottomOf="@+id/rating"
+                app:layout_constraintStart_toEndOf="@+id/notification_image"
+                app:layout_constraintTop_toBottomOf="@+id/notification_rating"
                 tools:text="City -" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -128,7 +128,7 @@
                 android:textColor="@android:color/darker_gray"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/details"
-                app:layout_constraintStart_toEndOf="@id/image"
+                app:layout_constraintStart_toEndOf="@id/notification_image"
                 app:layout_constraintTop_toBottomOf="@+id/recommendation_category"
                 tools:text="Visit -" />
 
@@ -141,7 +141,7 @@
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/image"
+                app:layout_constraintStart_toEndOf="@+id/notification_image"
                 app:layout_constraintTop_toBottomOf="@+id/status"
                 tools:text="Has Buses" />
     </androidx.constraintlayout.widget.ConstraintLayout>

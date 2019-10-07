@@ -1,5 +1,7 @@
 package com.saivo.recommendo.util.helpers
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.saivo.recommendo.BuildConfig
 import com.saivo.recommendo.data.access.TokenDao
@@ -9,6 +11,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.Exception
+import java.time.Duration
 
 inline fun <reified T> retrofitCreate(client: OkHttpClient): T {
     return Retrofit.Builder().client(client).baseUrl(getBaseUrl())
@@ -33,8 +36,10 @@ inline fun <reified T> authRetrofit(connection: IConnection, tokenDao: TokenDao)
     return retrofitCreate(httpClient(authInterceptor(tokenDao), connection = connection))
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 fun httpClient(connection: IConnection): OkHttpClient {
     return OkHttpClient.Builder()
+        .callTimeout(Duration.ofSeconds(60))
         .addInterceptor(connection)
         .build()
 }

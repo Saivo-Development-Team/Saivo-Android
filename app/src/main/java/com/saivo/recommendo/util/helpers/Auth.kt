@@ -6,6 +6,6 @@ fun token(tokenDao: TokenDao): String {
     tokenDao.let { return it.getTokenType() + it.getAccessToken() }
 }
 
-fun basic(id: String, secret: String): String {
+fun basicAuth(id: String, secret: String): String {
     return "Basic ${base64encode(createByteArray("${id}:${secret}"))}"
 }

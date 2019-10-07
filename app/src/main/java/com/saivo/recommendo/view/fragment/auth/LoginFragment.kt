@@ -14,7 +14,7 @@ import com.saivo.recommendo.util.helpers.LOGIN_SUCCESSFUL
 import com.saivo.recommendo.util.helpers.LOGIN_UNSUCCESSFUL
 import com.saivo.recommendo.view.fragment.CoroutineFragment
 import com.saivo.recommendo.view.viewmodel.auth.AuthViewModel
-import com.saivo.recommendo.view.viewmodel.auth.AuthViewModelFactory
+import com.saivo.recommendo.view.viewmodel.ViewModelFactory
 import com.saivo.recommendo.view.viewmodel.auth.IAuthLoginUser
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.coroutines.launch
@@ -27,7 +27,7 @@ class LoginFragment : CoroutineFragment(), KodeinAware {
     override val kodein by closestKodein()
     private lateinit var authViewModel: IAuthLoginUser
     private val userDataSource: IUserDataSource by instance()
-    private val authViewModelFactory: AuthViewModelFactory by instance()
+    private val authViewModelFactory: ViewModelFactory by instance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

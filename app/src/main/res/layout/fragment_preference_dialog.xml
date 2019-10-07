@@ -54,27 +54,28 @@
 
             <TextView
 
-                    android:id="@+id/textView3"
+                    android:id="@+id/preference_description_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:labelFor="@id/editText"
+                    android:labelFor="@id/preference_description_editText"
                     android:paddingStart="4dp"
                     android:paddingEnd="4dp"
                     android:text="@string/description" />
 
             <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/preference_description_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autofillHints=""
                     android:ems="10"
+                    android:maxLines="1"
                     android:gravity="start|top"
                     android:inputType="textMultiLine"
                     tools:targetApi="o" />
 
             <Button
-                    android:id="@+id/button"
+                    android:id="@+id/preference_save_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/black"

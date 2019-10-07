@@ -12,7 +12,7 @@ import com.saivo.recommendo.util.helpers.*
 import com.saivo.recommendo.util.helpers.REGISTRATION_SUCCESSFUL
 import com.saivo.recommendo.view.fragment.CoroutineFragment
 import com.saivo.recommendo.view.viewmodel.auth.AuthViewModel
-import com.saivo.recommendo.view.viewmodel.auth.AuthViewModelFactory
+import com.saivo.recommendo.view.viewmodel.ViewModelFactory
 import com.saivo.recommendo.view.viewmodel.auth.IAuthRegisterUser
 import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.coroutines.launch
@@ -25,7 +25,7 @@ class RegisterFragment : CoroutineFragment(), KodeinAware {
     override val kodein by closestKodein()
     private lateinit var authViewModel: IAuthRegisterUser
     private val userDataSource: IUserDataSource by instance()
-    private val authViewModelFactory: AuthViewModelFactory by instance()
+    private val authViewModelFactory: ViewModelFactory by instance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

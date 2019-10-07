@@ -5,14 +5,16 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.saivo.recommendo.data.model.infrastructure.Client
+import com.saivo.recommendo.util.helpers.CLIENT_ID
+import kotlinx.coroutines.Deferred
 
 @Dao
 interface ClientDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun updateClientCredentials(client: Client)
+    fun updateClient(client: Client)
 
-    @Query("select * from client where deviceClient = 0")
-    fun getClientCredentials(): Client?
+    @Query("select * from client where deviceClient = $CLIENT_ID")
+    fun getClient(): Client?
 
 }

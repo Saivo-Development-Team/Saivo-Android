@@ -16,10 +16,9 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.saivo.recommendo.R
 import com.saivo.recommendo.view.fragment.CoroutineFragment
-import com.saivo.recommendo.view.viewmodel.auth.AuthViewModelFactory
+import com.saivo.recommendo.view.viewmodel.ViewModelFactory
 import com.saivo.recommendo.view.viewmodel.user.IUserViewModel
 import com.saivo.recommendo.view.viewmodel.user.UserViewModel
-import com.saivo.recommendo.view.viewmodel.user.UserViewModelFactory
 import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
@@ -33,7 +32,7 @@ import org.kodein.di.generic.instance
 class MapFragment : CoroutineFragment(), KodeinAware, OnMapReadyCallback {
     override val kodein: Kodein by closestKodein()
     private lateinit var userViewModel: IUserViewModel
-    private val userViewModelFactory: UserViewModelFactory by instance()
+    private val viewModelFactory: ViewModelFactory by instance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +43,7 @@ class MapFragment : CoroutineFragment(), KodeinAware, OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        userViewModel = ViewModelProvider(this, userViewModelFactory).get(UserViewModel::class.java)
+        userViewModel = ViewModelProvider(this, viewModelFactory).get(UserViewModel::class.java)
 
         launch {
             userViewModel.userData.await().observe(

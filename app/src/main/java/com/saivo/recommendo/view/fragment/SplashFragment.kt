@@ -11,14 +11,16 @@ import com.saivo.recommendo.R
 import com.saivo.recommendo.data.access.ClientDao
 import com.saivo.recommendo.data.access.TokenDao
 import com.saivo.recommendo.data.model.infrastructure.Client
+import com.saivo.recommendo.data.model.infrastructure.Token
 import com.saivo.recommendo.network.resquest.IClientService
 import com.saivo.recommendo.network.resquest.ITokenService
-import com.saivo.recommendo.util.helpers.basic
+import com.saivo.recommendo.util.helpers.basicAuth
 import com.saivo.recommendo.util.helpers.createUUID
 import com.saivo.recommendo.util.helpers.retrofit
 import com.saivo.recommendo.util.network.IClient
 import com.saivo.recommendo.util.network.IConnection
 import com.saivo.recommendo.util.network.IToken
+import com.saivo.recommendo.view.viewmodel.auth.IServerAuthListener
 import kotlinx.android.synthetic.main.fragment_splash.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -30,8 +32,14 @@ import org.kodein.di.generic.instance
 
 
 @ExperimentalStdlibApi
-class SplashFragment : CoroutineFragment(), KodeinAware {
+class SplashFragment : CoroutineFragment(), KodeinAware, IServerAuthListener {
+
+
     override val kodein: Kodein by closestKodein()
+//    private lateinit var serverViewModel: IServerAuth
+//    private val viewModelFactory: ViewModelFactory by instance()
+
+    private val secret = createUUID()
     private val tokenDao: TokenDao by instance()
     private val clientDao: ClientDao by instance()
     private val connection: IConnection by instance()
@@ -48,11 +56,36 @@ class SplashFragment : CoroutineFragment(), KodeinAware {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        serverViewModel = ViewModelProvider(this, viewModelFactory).get(ServerViewModel::class.java)
+//        serverViewModel.addServerAuthListener(this)
+//        launch { serverViewModel.authInit() }
+
         initClientWithToken()
             .invokeOnCompletion {
                 Navigation.findNavController(view).navigate(R.id.to_login_action)
             }
     }
+
+    override fun onInit() {
+        setLoadingText("Getting Access...")
+    }
+
+    override fun onRegister() {
+        setLoadingText("Registering...")
+    }
+
+    override fun onRegistered() {
+        setLoadingText("Got Access")
+    }
+
+    override fun onCreateToken(block: () -> Any) {
+        setLoadingText("All Done!")
+    }
+
+    override fun onTokenCreated(block: ((token: Token) -> Any) -> Unit) {
+        setLoadingText("All Done!")
+    }
+
 
     private fun setLoadingText(text: String) {
         launch(this.coroutineContext) {
@@ -61,18 +94,53 @@ class SplashFragment : CoroutineFragment(), KodeinAware {
     }
 
     private fun initClientWithToken() = launch(IO) {
+        val client = clientDao.getClient()
         runCatching {
-            val secret = createUUID()
-            return@runCatching token(tokenDao, client(clientDao) { clientDao ->
-                Client(clientSecret = secret, clientId = registerClient(secret)).also {
-                    clientDao.updateClientCredentials(it.apply { clientSecret = it.clientSecret })
-                }
-            }) { tokenDao, client -> createAccessToken(tokenDao, client) }
 
+            return@runCatching getToken(secret)
         }.onFailure {
             Log.e("AuthFailure", it.message.toString())
         }.onSuccess {
-            Log.e("AuthSuccess", it)
+            runCatching {
+                checkToken(it, client)
+            }.onFailure {
+                recreateToken(client)
+            }
+        }
+    }
+
+    private suspend fun recreateToken(client: Client?) {
+        runCatching {
+            if (client != null) createAccessToken(tokenDao, client)
+        }.onFailure {
+            when (it) {
+                is retrofit2.HttpException -> {
+                    registerClient(secret)
+//                    recreateToken(client)
+                }
+            }
+        }
+    }
+
+    private suspend fun getToken(secret: String): String {
+        return token(tokenDao, client(clientDao) { clientDao ->
+            Client(clientSecret = secret, clientId = registerClient(secret)).also {
+                clientDao.updateClient(it.apply { clientSecret = it.clientSecret })
+            }
+        }) { tokenDao, client -> createAccessToken(tokenDao, client) }
+    }
+
+    private suspend fun checkToken(
+        token: String,
+        client: Client?
+    ): Any = withContext(IO) {
+        setLoadingText("Checking Access")
+        return@withContext when {
+            client != null -> retrofit<ITokenService>(connection = connection).checkTokenAsync(
+                token,
+                basicAuth(client.clientId, client.clientSecret)
+            ).await()
+            else -> Any()
         }
     }
 
@@ -80,7 +148,7 @@ class SplashFragment : CoroutineFragment(), KodeinAware {
         withContext(IO) {
             setLoadingText("Getting Access")
             retrofit<ITokenService>(connection = connection).getTokenByClientAsync(
-                authentication = basic(client.clientId, client.clientSecret),
+                authentication = basicAuth(client.clientId, client.clientSecret),
                 grant_type = "client_credentials"
             ).await().apply {
                 tokenDao.updateTokenData(this)

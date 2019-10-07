@@ -13,8 +13,7 @@ import com.saivo.recommendo.network.resquest.ITokenService
 import com.saivo.recommendo.network.resquest.IUserService
 import com.saivo.recommendo.util.network.Connection
 import com.saivo.recommendo.util.network.IConnection
-import com.saivo.recommendo.view.viewmodel.auth.AuthViewModelFactory
-import com.saivo.recommendo.view.viewmodel.user.UserViewModelFactory
+import com.saivo.recommendo.view.viewmodel.ViewModelFactory
 import kotlinx.coroutines.InternalCoroutinesApi
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -34,19 +33,32 @@ class Recommendo : Application(), KodeinAware {
         bind() from singleton { instance<Database>().tokenDao() }
         bind() from singleton { instance<Database>().clientDao() }
 
-        bind() from provider { AuthViewModelFactory() }
+        bind() from provider { ViewModelFactory(instance(), instance(), instance(), instance()) }
 
         bind<IConnection>() with singleton { Connection(instance()) }
 
-        bind<IUserService>() with singleton { INetworkService.Companion<IUserService>(instance(), instance()) }
-        bind<ITokenService>() with singleton { INetworkService.Companion<ITokenService>(instance(), instance()) }
-        bind<IClientService>() with singleton { INetworkService.Companion<IClientService>(instance(), instance()) }
+        bind<IUserService>() with singleton {
+            INetworkService.Companion<IUserService>(
+                instance(),
+                instance()
+            )
+        }
+        bind<ITokenService>() with singleton {
+            INetworkService.Companion<ITokenService>(
+                instance(),
+                instance()
+            )
+        }
+        bind<IClientService>() with singleton {
+            INetworkService.Companion<IClientService>(
+                instance(),
+                instance()
+            )
+        }
 
         bind<IUserDataSource>() with singleton { UserDataSource(instance()) }
 
         bind<IUserRepository>() with singleton { UserRepository(instance(), instance()) }
-
-        bind() from provider { UserViewModelFactory(instance()) }
     }
 
     override fun onCreate() {

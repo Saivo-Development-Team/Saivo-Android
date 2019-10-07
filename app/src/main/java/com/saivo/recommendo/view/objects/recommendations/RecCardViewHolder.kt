@@ -11,12 +11,12 @@ import kotlinx.android.synthetic.main.recommendation_card.view.*
 
 class RecCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val info = itemView.recommendation_info_text!!
-    private val users = itemView.users
-    private val title = itemView.title
-    private val image = itemView.image
-    private val stars = itemView.stars
+    private val users = itemView.notification_users
+    private val title = itemView.notification_title
+    private val image = itemView.notification_image
+    private val stars = itemView.notification_stars
     private val status = itemView.status
-    private val rating = itemView.rating
+    private val rating = itemView.notification_rating
     private val details = itemView.details
     private val distance = itemView.distance
     private val category = itemView.recommendation_category

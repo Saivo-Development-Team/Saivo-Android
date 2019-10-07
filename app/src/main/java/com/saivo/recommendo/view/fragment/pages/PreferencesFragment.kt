@@ -1,11 +1,11 @@
 package com.saivo.recommendo.view.fragment.pages
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.saivo.recommendo.R
 import com.saivo.recommendo.view.fragment.dialog.PreferenceDialogFragment
@@ -17,7 +17,6 @@ class PreferencesFragment : Fragment() {
 
     private val preferenceDialogFragment = PreferenceDialogFragment()
     private val recyclerAdapter = RecyclerAdapter(PreCard::class.java)
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -71,3 +70,7 @@ class PreferencesFragment : Fragment() {
         return data
     }
 }
+
+
+
+

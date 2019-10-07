@@ -14,11 +14,9 @@ interface ITokenService {
         @Header("Authorization") authentication: String
     ) : Deferred<Token>
 
-    @POST("/oauth/token")
-    fun getTokenByUserAsync(
-        @Query("email") email: String,
-        @Query("password") password: String,
-        @Query("grant_type") grant_type: String,
+    @POST("/oauth/check_token")
+    fun checkTokenAsync(
+        @Query("token") token: String,
         @Header("Authorization") authentication: String
-    ) : Deferred<Token>
+    ) : Deferred<Any>
 }

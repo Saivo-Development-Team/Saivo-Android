@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.saivo.recommendo.R
 import com.saivo.recommendo.network.access.IUserDataSource
 import com.saivo.recommendo.view.fragment.CoroutineFragment
+import com.saivo.recommendo.view.viewmodel.ViewModelFactory
 import com.saivo.recommendo.view.viewmodel.auth.AuthViewModel
-import com.saivo.recommendo.view.viewmodel.auth.AuthViewModelFactory
 import com.saivo.recommendo.view.viewmodel.auth.IAuthRestPassword
 import kotlinx.android.synthetic.main.fragment_reset_password.*
 import kotlinx.coroutines.Dispatchers.IO
@@ -27,7 +27,7 @@ class ResetPasswordFragment : CoroutineFragment(), KodeinAware {
     private lateinit var authViewModel: IAuthRestPassword
 
     private val userDataSource: IUserDataSource by instance()
-    private val authViewModelFactory: AuthViewModelFactory by instance()
+    private val authViewModelFactory: ViewModelFactory by instance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

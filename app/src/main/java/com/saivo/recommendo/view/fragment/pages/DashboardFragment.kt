@@ -16,7 +16,7 @@ import com.saivo.recommendo.R
 import com.saivo.recommendo.view.fragment.CoroutineFragment
 import com.saivo.recommendo.view.viewmodel.user.IUserViewModel
 import com.saivo.recommendo.view.viewmodel.user.UserViewModel
-import com.saivo.recommendo.view.viewmodel.user.UserViewModelFactory
+import com.saivo.recommendo.view.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.layout_profile_banner.*
 import kotlinx.coroutines.launch
@@ -31,7 +31,7 @@ import org.kodein.di.generic.instance
 class DashboardFragment : CoroutineFragment(), KodeinAware {
     override val kodein: Kodein by closestKodein()
     private lateinit var userViewModel: IUserViewModel
-    private val userViewModelFactory: UserViewModelFactory by instance()
+    private val viewModelFactory: ViewModelFactory by instance()
     //
     private lateinit var drawerToggle: ActionBarDrawerToggle
     private lateinit var appCompatActivity: AppCompatActivity
@@ -49,7 +49,7 @@ class DashboardFragment : CoroutineFragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        userViewModel = ViewModelProvider(this, userViewModelFactory).get(UserViewModel::class.java)
+        userViewModel = ViewModelProvider(this, viewModelFactory).get(UserViewModel::class.java)
 
         launch {
             userViewModel.userData.await().observe(
