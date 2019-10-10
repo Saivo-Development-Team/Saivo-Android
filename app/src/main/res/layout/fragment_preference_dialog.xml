@@ -34,7 +34,10 @@
             <MultiAutoCompleteTextView
                     android:id="@+id/category_auto_complete_textview"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:maxLength="13"
+                    android:maxLines="1" />
 
             <TextView
 
@@ -42,7 +45,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:labelFor="@id/preference_auto_complete_textview"
                     android:paddingStart="4dp"
                     android:paddingEnd="4dp"
                     android:text="@string/preference" />
@@ -50,7 +52,11 @@
             <AutoCompleteTextView
                     android:id="@+id/preference_auto_complete_textview"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:hint="@string/like_dislike"
+                    android:lines="1"
+                    android:maxLength="35"
+                    android:maxLines="1" />
 
             <TextView
 
@@ -69,9 +75,10 @@
                     android:layout_height="wrap_content"
                     android:autofillHints=""
                     android:ems="10"
-                    android:maxLines="1"
                     android:gravity="start|top"
                     android:inputType="textMultiLine"
+                    android:maxLength="150"
+                    android:maxLines="5"
                     tools:targetApi="o" />
 
             <Button

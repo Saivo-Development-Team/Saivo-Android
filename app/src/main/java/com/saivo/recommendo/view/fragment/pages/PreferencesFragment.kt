@@ -1,22 +1,23 @@
 package com.saivo.recommendo.view.fragment.pages
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.saivo.recommendo.R
+import com.saivo.recommendo.view.fragment.dialog.IPreferenceDialogListener
 import com.saivo.recommendo.view.fragment.dialog.PreferenceDialogFragment
 import com.saivo.recommendo.view.objects.RecyclerAdapter
 import com.saivo.recommendo.view.objects.preferences.PreCard
 import kotlinx.android.synthetic.main.fragment_preferences.*
 
-class PreferencesFragment : Fragment() {
-
+class PreferencesFragment : Fragment(), IPreferenceDialogListener {
     private val preferenceDialogFragment = PreferenceDialogFragment()
     private val recyclerAdapter = RecyclerAdapter(PreCard::class.java)
+    private val data = arrayListOf<PreCard>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,18 +32,17 @@ class PreferencesFragment : Fragment() {
             layoutManager = LinearLayoutManager(this@PreferencesFragment.context)
             adapter = recyclerAdapter
         }
-        recyclerAdapter.addToListItems(getData())
-
+        setRecyclerItems()
         floating_action_button.setOnClickListener {
+            preferenceDialogFragment.setPreferenceDialogListener(this)
             preferenceDialogFragment.show(
-                (activity as AppCompatActivity).supportFragmentManager,
+                this.parentFragmentManager,
                 "PreferenceBottomSheet"
             )
         }
     }
 
-    private fun getData(): ArrayList<PreCard> {
-        val data = arrayListOf<PreCard>()
+    private fun setRecyclerItems() {
         data.add(
             PreCard(
                 likes = "Coding",
@@ -67,8 +67,18 @@ class PreferencesFragment : Fragment() {
                 description = "So am a Number guys, and Love to tyr new things with numbers, yet I still fails maths LOL"
             )
         )
-        return data
+        recyclerAdapter.addToListItems(data)
     }
+
+    private fun addCardData(card: PreCard): ArrayList<PreCard> {
+        return data.apply { add(card) }
+    }
+
+    override fun onPreferenceSaved(card: PreCard) {
+        recyclerAdapter.addToListItems(addCardData(card))
+        recyclerAdapter.notifyDataSetChanged()
+    }
+
 }
 
 

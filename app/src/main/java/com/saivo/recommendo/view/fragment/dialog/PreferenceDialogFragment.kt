@@ -9,6 +9,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textview.MaterialTextView
 import com.saivo.recommendo.R
 import com.saivo.recommendo.util.helpers.textWatcher
+import com.saivo.recommendo.view.objects.preferences.PreCard
 import kotlinx.android.synthetic.main.fragment_preference_dialog.*
 
 /**
@@ -47,14 +48,32 @@ class PreferenceDialogFragment : BottomSheetDialogFragment() {
         preference_auto_complete_textview.apply {
             addTextChangedListener(textWatcher {
                 it?.apply {
-                    if(contains(',')){
+                    if (contains(',')) {
                         toString().trim().split(",").apply {
                             preferenceLikeText.text = this[0]
-                            if(size > 1 || size < 2) preferenceDislikeText.text = this[1]
+                            if (size > 1 || size < 2) preferenceDislikeText.text = this[1]
                         }
                     }
                 }
             })
+        }
+
+        preference_description_editText.apply {
+            addTextChangedListener(textWatcher {
+                preferenceDescriptionText.text = it
+            })
+        }
+
+        preference_save_button.setOnClickListener {
+            preferenceDialogListener?.onPreferenceSaved(
+                PreCard(
+                    likes = preferenceLikeText.text.toString(),
+                    dislikes = preferenceDislikeText.text.toString(),
+                    category = categoryText.text.toString(),
+                    description = preferenceDescriptionText.text.toString()
+                )
+            )
+            this.dismiss()
         }
 
     }
@@ -66,10 +85,9 @@ class PreferenceDialogFragment : BottomSheetDialogFragment() {
         preferenceDescriptionText = view.findViewById(R.id.preference_description_text)
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        runCatching {
-            preferenceDialogListener = context as IPreferenceDialogListener
+    fun setPreferenceDialogListener(listener: IPreferenceDialogListener) {
+        if (preferenceDialogListener == null) {
+            preferenceDialogListener = listener
         }
     }
 

@@ -8,12 +8,10 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
 import com.saivo.recommendo.R
 import com.saivo.recommendo.util.helpers.toastMessage
-import com.saivo.recommendo.view.fragment.dialog.IPreferenceDialogListener
-import com.saivo.recommendo.view.fragment.dialog.PreferenceDialogFragment
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
-class HomeActivity : AppCompatActivity(), IPreferenceDialogListener {
+class HomeActivity : AppCompatActivity() {
     private lateinit var mainNavController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,9 +28,4 @@ class HomeActivity : AppCompatActivity(), IPreferenceDialogListener {
             super.onBackPressed()
         }
     }
-
-    override fun onPreferenceClicked(position: Int) {
-        toastMessage(this, "Preference Bottom Sheet")
-    }
-
 }

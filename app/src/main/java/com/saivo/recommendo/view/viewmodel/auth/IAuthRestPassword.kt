@@ -6,5 +6,5 @@ interface IAuthRestPassword: IValidation {
     fun setNewOTPNumber(pin: String)
     fun checkOTPMatch(pin: String): Boolean
     fun getOTPNumber(): String
-    fun popToLogin(view: View)
+    fun toLogin(view: View)
 }

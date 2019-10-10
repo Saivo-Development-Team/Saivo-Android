@@ -1,5 +1,7 @@
 package com.saivo.recommendo.view.fragment.dialog
 
+import com.saivo.recommendo.view.objects.preferences.PreCard
+
 interface IPreferenceDialogListener {
-    fun onPreferenceClicked(position: Int)
+    fun onPreferenceSaved(card: PreCard)
 }

@@ -75,8 +75,8 @@ class AuthViewModel : ViewModel(), IAuthRegisterUser, IAuthLoginUser, IAuthRestP
         Navigation.findNavController(view).navigate(R.id.action_register_to_home)
     }
 
-    override fun popToLogin(view: View) {
-        Navigation.findNavController(view).navigate(R.id.action_reset_password_pop)
+    override fun toLogin(view: View) {
+        Navigation.findNavController(view).navigate(R.id.action_reset_password_to_login)
     }
 
     override fun setRegisterCredentials(registerCredentials: RegisterCredentials) {
