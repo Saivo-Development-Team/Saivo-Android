@@ -84,10 +84,10 @@ class UserDataSource(
     }
 
     override suspend fun restUserPassword(password: String, email: String) {
-        userService.restUserPassword(password, email)
+        userService.restUserPasswordAsync(password, email).await()
     }
 
-    override suspend fun getOTPFromServer(number: String, email: String): String {
+    override suspend fun getOTPFromServer(number: String, email: String): Response {
         return userService.getOTPFromServerAsync(number, email).await()
     }
 }

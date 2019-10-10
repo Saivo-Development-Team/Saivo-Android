@@ -21,8 +21,8 @@ interface IUserService {
     fun registerUserAsync(@Body registerCredentials: RegisterCredentials): Deferred<Response>
 
     @POST("/user/reset-password/{email}")
-    fun restUserPassword(@Body password: String, @Path("email") email: String)
+    fun restUserPasswordAsync(@Body password: String, @Path("email") email: String) : Deferred<Response>
 
     @POST("/user/otp/{email}")
-    fun getOTPFromServerAsync(@Body number: String, @Path("email") email: String): Deferred<String>
+    fun getOTPFromServerAsync(@Body number: String, @Path("email") email: String): Deferred<Response>
 }
