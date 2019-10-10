@@ -9,12 +9,14 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.saivo.recommendo.R
 import com.saivo.recommendo.network.access.IUserDataSource
+import com.saivo.recommendo.util.helpers.toastMessage
 import com.saivo.recommendo.view.fragment.CoroutineFragment
 import com.saivo.recommendo.view.viewmodel.ViewModelFactory
 import com.saivo.recommendo.view.viewmodel.auth.AuthViewModel
 import com.saivo.recommendo.view.viewmodel.auth.IAuthRestPassword
 import kotlinx.android.synthetic.main.fragment_reset_password.*
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.kodein.di.KodeinAware
@@ -26,6 +28,7 @@ class ResetPasswordFragment : CoroutineFragment(), KodeinAware {
     override val kodein by closestKodein()
     private lateinit var authViewModel: IAuthRestPassword
 
+    private var canChange = true
     private val userDataSource: IUserDataSource by instance()
     private val authViewModelFactory: ViewModelFactory by instance()
 
@@ -43,28 +46,9 @@ class ResetPasswordFragment : CoroutineFragment(), KodeinAware {
         reset_confirm_button.setOnClickListener {
             runCatching {
                 when {
-                    email_number_input_group.isVisible -> {
-                        initRestPassword().invokeOnCompletion {
-                            email_number_input_group.visibility = View.GONE
-                            otp_input_group.visibility = View.VISIBLE
-                        }
-                    }
-                    otp_input_group.isVisible -> launch {
-                        if (checkOTPValues()) {
-                            otp_input_group.visibility = View.GONE
-                            reset_password_editText.visibility = View.VISIBLE
-                            reset_confirm_button.setText(R.string.change_password)
-                        }
-                    }
-                    reset_password_editText.isVisible -> {
-                        authViewModel.apply {
-                            when {
-                                passwordValidation(reset_password_editText) -> {
-                                    popToLogin(view)
-                                }
-                            }
-                        }
-                    }
+                    email_number_input_group.isVisible -> getUserInfo()
+                    otp_input_group.isVisible -> showOtpPad()
+                    reset_password_editText.isVisible -> changePassword()
                     else -> Unit
                 }
             }
@@ -72,6 +56,38 @@ class ResetPasswordFragment : CoroutineFragment(), KodeinAware {
 
     }
 
+    private fun changePassword() = launch {
+        authViewModel.apply {
+            reset_password_editText.apply {
+                when {
+                    passwordValidation(this) -> {
+                        resetUserPassword(
+                            password = text.toString(),
+                            email = reset_email_editText.text.toString()
+                        )
+                        toLogin(this@ResetPasswordFragment.requireView())
+                    }
+                }
+            }
+        }
+    }
+
+    private fun showOtpPad() = launch {
+        if (checkOTPValues()) {
+            otp_input_group.visibility = View.GONE
+            reset_password_editText.visibility = View.VISIBLE
+            reset_confirm_button.setText(R.string.change_password)
+        }
+    }
+
+    private fun getUserInfo() {
+        initRestPassword().invokeOnCompletion {
+            if (canChange) {
+                email_number_input_group.visibility = View.GONE
+                otp_input_group.visibility = View.VISIBLE
+            }
+        }
+    }
 
     private suspend fun checkOTPValues() = withContext(this.coroutineContext) {
         authViewModel.checkOTPMatch(otp_input_view.text.toString())
@@ -89,13 +105,23 @@ class ResetPasswordFragment : CoroutineFragment(), KodeinAware {
     }
 
     private suspend fun setOTPNumber(number: String, email: String) = withContext(IO) {
-        authViewModel.setNewOTPNumber(sendSMS(number, email))
+        runCatching {
+            return@withContext authViewModel.setNewOTPNumber(sendSMS(number, email))
+        }.onFailure {
+            launch(Main) {
+                toastMessage(this@ResetPasswordFragment.context, it.message.toString())
+            }
+            canChange = false
+        }.onSuccess {
+            canChange = true
+        }
     }
 
     private suspend fun sendSMS(number: String, email: String): String = withContext(IO) {
-        return@withContext userDataSource.getOTPFromServer(
-            number = number,
-            email = email
-        )
+        userDataSource.getOTPFromServer(number = number, email = email).apply {
+            println(" Data FOR OTP [$data]")
+            if (error != "USER_NOT_FOUND") return@withContext (data as String)
+        }
+        throw Exception("User Not Found")
     }
 }
