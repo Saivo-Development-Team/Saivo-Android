@@ -19,4 +19,9 @@
             android:id="@+id/settings"
             android:name="com.saivo.recommendo.view.fragment.pages.SettingsFragment"
             android:label="Settings" />
+    <fragment
+            android:id="@+id/account"
+            android:name="com.saivo.recommendo.view.fragment.pages.AccountFragment"
+            android:label="Account"
+            tools:layout="@layout/account_fragment" />
 </navigation>
