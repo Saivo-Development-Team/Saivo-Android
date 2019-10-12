@@ -13,6 +13,7 @@ import com.saivo.recommendo.util.helpers.isPassword
 
 
 class AuthViewModel : ViewModel(), IAuthRegisterUser, IAuthLoginUser, IAuthRestPassword {
+    override var canChange: Boolean = false
     private lateinit var loginCredentials: LoginCredentials
     private lateinit var registerCredentials: RegisterCredentials
     private lateinit var otpNumberValue: String
