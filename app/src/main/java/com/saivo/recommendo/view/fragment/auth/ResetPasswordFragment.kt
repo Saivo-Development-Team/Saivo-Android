@@ -27,8 +27,6 @@ import org.kodein.di.generic.instance
 class ResetPasswordFragment : CoroutineFragment(), KodeinAware {
     override val kodein by closestKodein()
     private lateinit var authViewModel: IAuthRestPassword
-
-    private var canChange = true
     private val userDataSource: IUserDataSource by instance()
     private val authViewModelFactory: ViewModelFactory by instance()
 
@@ -82,7 +80,7 @@ class ResetPasswordFragment : CoroutineFragment(), KodeinAware {
 
     private fun getUserInfo() {
         initRestPassword().invokeOnCompletion {
-            if (canChange) {
+            if (authViewModel.canChange) {
                 email_number_input_group.visibility = View.GONE
                 otp_input_group.visibility = View.VISIBLE
             }
@@ -111,17 +109,16 @@ class ResetPasswordFragment : CoroutineFragment(), KodeinAware {
             launch(Main) {
                 toastMessage(this@ResetPasswordFragment.context, it.message.toString())
             }
-            canChange = false
+            authViewModel.canChange = false
         }.onSuccess {
-            canChange = true
+            authViewModel.canChange = true
         }
     }
 
     private suspend fun sendSMS(number: String, email: String): String = withContext(IO) {
-        userDataSource.getOTPFromServer(number = number, email = email).apply {
-            println(" Data FOR OTP [$data]")
-            if (error != "USER_NOT_FOUND") return@withContext (data as String)
+        with(userDataSource.getOTPFromServer(number = number, email = email)) {
+            if (!error.isNotBlank()) return@withContext (data as String)
+            else throw Exception(message)
         }
-        throw Exception("User Not Found")
     }
 }
