@@ -12,43 +12,68 @@ import com.saivo.recommendo.util.helpers.basicAuth
 import com.saivo.recommendo.util.helpers.createUUID
 import com.saivo.recommendo.util.helpers.retrofit
 import com.saivo.recommendo.util.network.IConnection
-import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.async
-import kotlinx.coroutines.withContext
 
 class ServerViewModel(
-    private val tokenDao: TokenDao,
-    private val clientDao: ClientDao,
-    private val connection: IConnection
+        private val tokenDao: TokenDao,
+        private val clientDao: ClientDao,
+        private val connection: IConnection
 ) : ViewModel(), IServerAuth {
     private val secret = createUUID()
     private lateinit var client: Client
     private lateinit var authListener: IServerAuthListener
 
-    override suspend fun authInit() {
+    override suspend fun init() {
         getListenerOrNull().onInit()
-        getClient()
+        initAuth()
     }
 
-    override fun saveClient(client: Client) {
-        return clientDao.updateClient(client)
+    private fun auth() = with(getClient()) { basicAuth(clientId, clientSecret) }
+
+    override suspend fun saveClient(client: Client) = withContext(IO) {
+        clientDao.updateClient(client)
     }
 
-    override suspend fun getClient(): Client {
-        return withContext(IO) {
-            clientDao.getClient() ?: createClient(registerClient(secret), secret)
-        }.apply {
-            client = this
+    override fun getClient(): Client {
+        runBlocking { client = client() }
+        getListenerOrNull().onAccess()
+        return client
+    }
+
+    private suspend fun client() = withContext(IO) {
+        clientDao.getClient() ?: createClient(registerClient(secret), secret)
+    }
+
+    private suspend fun token() = withContext(IO) {
+        tokenDao.getToken().apply {
+            if (this == null) saveAccessToken(getAccessToken())
+            else isValidToken(this).let {
+                if (!it) saveAccessToken(getAccessToken())
+            }
         }
     }
 
-    override suspend fun getToken(): Token {
-        return withContext(IO) {
-            tokenDao.getToken() ?: getAccessToken(
-                basicAuth(client.clientId, client.clientSecret)
-            ).apply { saveAccessToken(this) }
+    override suspend fun initAuth() {
+        runCatching {
+            token()
+        }.onFailure {
+            createClient(registerClient(secret), secret)
+            initAuth()
         }
+    }
+
+    override suspend fun isValidToken(token: Token): Boolean {
+        runCatching {
+            retrofit<ITokenService>(connection = connection).checkTokenAsync(
+                    token.accessToken, auth()
+            ).await().also { println(it) }
+        }.onFailure {
+            it.printStackTrace()
+        }.onSuccess {
+            return true
+        }
+        return false
     }
 
     override fun saveAccessToken(token: Token) {
@@ -59,26 +84,28 @@ class ServerViewModel(
         getListenerOrNull().onRegister()
         return CoroutineScope(IO).async {
             return@async retrofit<IClientService>(connection = connection)
-                .registerClientAsync(secret).await()
+                    .registerClientAsync(secret).await()
         }.await().data as String
     }
 
-    override suspend fun getAccessToken(basicAuth: String): Token {
+    override suspend fun getAccessToken(): Token {
         getListenerOrNull().apply {
-            onCreateToken { (Log.i("TOKEN", "Create Token Started")) }
             return withContext(IO) {
+                onCreateToken { (Log.i("TOKEN", "Creating Token")) }
                 retrofit<ITokenService>(connection = connection).getTokenByClientAsync(
-                    authentication = basicAuth, grant_type = "client_credentials"
+                        authentication = auth(), grant_type = "client_credentials"
                 ).await()
             }.apply {
-                onTokenCreated { (Log.i("TOKEN", "Token Created [$accessToken]")) }
+                onTokenCreated { (Log.i("TOKEN", "Token Created")) }
             }
         }
     }
 
     private fun createClient(Id: String, secret: String): Client {
-        return Client(clientId = Id, clientSecret = secret).apply {
-            saveClient(this)
+        return Client(clientId = Id, clientSecret = secret).also { newClient ->
+            CoroutineScope(IO).launch {
+                saveClient(newClient)
+            }
         }
     }
 

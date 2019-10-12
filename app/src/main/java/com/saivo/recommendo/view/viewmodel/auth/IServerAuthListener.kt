@@ -4,6 +4,7 @@ import com.saivo.recommendo.data.model.infrastructure.Token
 
 interface IServerAuthListener {
     fun onInit()
+    fun onAccess()
     fun onRegister()
     fun onRegistered()
     fun onCreateToken(block: () -> Any)
