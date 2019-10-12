@@ -1,11 +1,14 @@
 package com.saivo.recommendo.view.fragment.pages
 
 
+import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -15,6 +18,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.saivo.recommendo.R
+import com.saivo.recommendo.provider.ILocationProvider
+import com.saivo.recommendo.util.helpers.toastMessage
 import com.saivo.recommendo.view.fragment.CoroutineFragment
 import com.saivo.recommendo.view.viewmodel.ViewModelFactory
 import com.saivo.recommendo.view.viewmodel.user.IUserViewModel
@@ -32,6 +37,10 @@ import org.kodein.di.generic.instance
 class MapFragment : CoroutineFragment(), KodeinAware, OnMapReadyCallback {
     override val kodein: Kodein by closestKodein()
     private lateinit var userViewModel: IUserViewModel
+    private val deviceLocation: LiveData<Location>
+        get() = _deviceLocation
+    private var _deviceLocation = MutableLiveData<Location>()
+    private val locationProvider: ILocationProvider by instance()
     private val viewModelFactory: ViewModelFactory by instance()
 
     override fun onCreateView(
@@ -46,6 +55,10 @@ class MapFragment : CoroutineFragment(), KodeinAware, OnMapReadyCallback {
         userViewModel = ViewModelProvider(this, viewModelFactory).get(UserViewModel::class.java)
 
         launch {
+            locationProvider.getDeviceLocation().apply {
+                _deviceLocation.postValue(this)
+                toastMessage(this@MapFragment.requireContext(), this.toString())
+            }
             userViewModel.userData.await().observe(
                 this@MapFragment, Observer {
                     firstname_text_view.text = it.firstname
@@ -60,9 +73,11 @@ class MapFragment : CoroutineFragment(), KodeinAware, OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        deviceLocation.observe(this, Observer {
+            val location = LatLng(it.latitude, it.longitude)
+            googleMap.addMarker(MarkerOptions().position(location))
+            googleMap.moveCamera(CameraUpdateFactory.newLatLng(location))
+        })
     }
 
 }
