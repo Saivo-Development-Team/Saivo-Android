@@ -11,6 +11,8 @@ import com.saivo.recommendo.network.access.user.UserDataSource
 import com.saivo.recommendo.network.resquest.IClientService
 import com.saivo.recommendo.network.resquest.ITokenService
 import com.saivo.recommendo.network.resquest.IUserService
+import com.saivo.recommendo.provider.ILocationProvider
+import com.saivo.recommendo.provider.LocationProvider
 import com.saivo.recommendo.util.network.Connection
 import com.saivo.recommendo.util.network.IConnection
 import com.saivo.recommendo.view.viewmodel.ViewModelFactory
@@ -32,6 +34,8 @@ class Recommendo : Application(), KodeinAware {
         bind() from singleton { instance<Database>().userDao() }
         bind() from singleton { instance<Database>().tokenDao() }
         bind() from singleton { instance<Database>().clientDao() }
+
+        bind<ILocationProvider>() with singleton { LocationProvider(instance()) }
 
         bind() from provider { ViewModelFactory(instance(), instance(), instance(), instance()) }
 
