@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/ConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.fragment.pages.AccountFragment">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@color/lightBlueGray"
+          android:padding="20dp">
+
+    <ImageView
+            android:id="@+id/account_profile_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:clickable="true"
+            android:contentDescription="@string/profile_image"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/account_fullname"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/avatar" />
+
+    <TextView
+            android:id="@+id/account_fullname"
+            android:layout_width="wrap_content"
+            android:layout_height="20sp"
+            android:layout_margin="16dp"
+            app:layout_constraintBottom_toTopOf="@id/email_text_view"
+            app:layout_constraintStart_toEndOf="@id/account_profile_image"
+            app:layout_constraintTop_toTopOf="@+id/account_profile_image"
+            tools:text="Fullname" />
+
+    <TextView
+            android:id="@+id/account_phone_number"
+            android:layout_width="wrap_content"
+            android:layout_height="20sp"
+            app:layout_constraintBottom_toTopOf="@id/email_text_view"
+            app:layout_constraintStart_toStartOf="@+id/account_fullname"
+            app:layout_constraintTop_toBottomOf="@id/account_fullname"
+            tools:text="+27 (081)-908-8287" />
+
+    <TextView
+            android:id="@+id/email_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/account_profile_image"
+            app:layout_constraintStart_toStartOf="@id/account_phone_number"
+            app:layout_constraintTop_toBottomOf="@id/account_fullname"
+            tools:text="@string/email_example" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>
