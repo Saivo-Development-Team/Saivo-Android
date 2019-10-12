@@ -32,7 +32,6 @@ fun base64encode(byteArray: ByteArray): String {
 }
 
 fun createByteArray(string: String): ByteArray {
-    println(string)
    return string.toByteArray()
 }
 
