@@ -7,7 +7,8 @@ import androidx.room.PrimaryKey
 data class Preference(
     @PrimaryKey(autoGenerate = false)
     val id: String,
-    val prefer: String,
-    val disfavor: String,
+    val likes: String,
+    val dislikes: String,
+    val category: String,
     val description: String
 )
