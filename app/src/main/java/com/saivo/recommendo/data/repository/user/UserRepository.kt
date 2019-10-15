@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import com.saivo.recommendo.data.access.UserDao
 import com.saivo.recommendo.data.model.domain.User
 import com.saivo.recommendo.data.model.infrastructure.UserData
-import com.saivo.recommendo.network.access.IUserDataSource
+import com.saivo.recommendo.network.access.user.IUserDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
