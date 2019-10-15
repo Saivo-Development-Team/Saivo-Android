@@ -8,9 +8,7 @@ data class UserData(
     val email: String = "",
     val enabled: Boolean = true,
     val lastname: String = "",
-    val firstname: String = "",
-    val preferences: List<Preference> = listOf(),
-    val recommendations: List<Recommendation> = listOf()
+    val firstname: String = ""
 ) {
     fun getUserDetailsFromData(): User {
         return User(
@@ -20,13 +18,5 @@ data class UserData(
             lastname = lastname,
             firstname = firstname
         )
-    }
-
-    fun getUserPreferencesFromData(): List<Preference> {
-        return preferences
-    }
-
-    fun getUserRecommendationsFromData(): List<Recommendation> {
-        return recommendations
     }
 }

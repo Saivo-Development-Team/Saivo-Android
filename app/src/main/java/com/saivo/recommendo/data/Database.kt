@@ -2,19 +2,22 @@ package com.saivo.recommendo.data
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.Database as RDatabase
 import androidx.room.RoomDatabase
-import com.saivo.recommendo.data.access.TokenDao
+import androidx.room.TypeConverters
 import com.saivo.recommendo.data.access.ClientDao
+import com.saivo.recommendo.data.access.PreferenceDao
+import com.saivo.recommendo.data.access.TokenDao
 import com.saivo.recommendo.data.access.UserDao
 import com.saivo.recommendo.data.model.domain.Preference
 import com.saivo.recommendo.data.model.domain.Rating
 import com.saivo.recommendo.data.model.domain.Recommendation
 import com.saivo.recommendo.data.model.domain.User
-import com.saivo.recommendo.data.model.infrastructure.Token
 import com.saivo.recommendo.data.model.infrastructure.Client
+import com.saivo.recommendo.data.model.infrastructure.Token
+import com.saivo.recommendo.util.helpers.Converters
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.internal.synchronized
+import androidx.room.Database as RDatabase
 
 @RDatabase(
     entities =
@@ -24,6 +27,7 @@ import kotlinx.coroutines.internal.synchronized
     ],
     version = 15
 )
+@TypeConverters(Converters::class)
 abstract class Database : RoomDatabase() {
 
     companion object {
@@ -46,4 +50,5 @@ abstract class Database : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun tokenDao(): TokenDao
     abstract fun clientDao(): ClientDao
+    abstract fun preferenceDao(): PreferenceDao
 }

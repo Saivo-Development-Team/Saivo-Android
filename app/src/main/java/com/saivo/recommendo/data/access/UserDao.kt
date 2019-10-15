@@ -20,5 +20,8 @@ interface UserDao {
     @Query("select user from user where id = 0")
     fun getUserId(): String
 
+    @Query("select email from user where id = 0")
+    fun getUserEmail(): String
+
 //    fun getUserRatings(): LiveData<List<Rating>>
 }
