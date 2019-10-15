@@ -8,9 +8,15 @@
     <color name="lightGold">#FFD741</color>
     <color name="lightGray">#878787</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="Red">#E6C80A0A</color>
+    <color name="Blue">#0064C8</color>
+    <color name="Green">#00B400</color>
+    <color name="lightRed">#FA4B4B</color>
+    <color name="lightBlue">#3296FA</color>
+    <color name="lightGreen">#32B432</color>
     <color name="transparentGray">#59EBEBEB</color>
     <color name="startOfGradient">#E50585D5</color>
     <color name="endOfGradient">#005F5F</color>
-    <color name="lightGreen">#5964FFE1</color>
+    <color name="lightGreenGray">#5964FFE1</color>
     <color name="lightBlueGray">#CD6595CD</color>
 </resources>

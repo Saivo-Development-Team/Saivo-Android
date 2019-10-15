@@ -79,4 +79,10 @@
     <string name="like_dislike">What you Like,And Dislike</string>
     <string name="new_activities">New Activities</string>
     <string name="completed_activities">Completed activities</string>
+    <string name="close_alert">Close Alert</string>
+    <string name="alert_image">Alert Image</string>
+    <string name="turn_on_location">This app needs GPS Turned On</string>
+    <string name="enable_location">Please Enable GPS</string>
+    <string name="what_you_like">What you Like</string>
+    <string name="and_dislike">And Dislike</string>
 </resources>
