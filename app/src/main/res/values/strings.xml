@@ -79,4 +79,9 @@
     <string name="like_dislike">What you Like,And Dislike</string>
     <string name="new_activities">New Activities</string>
     <string name="completed_activities">Completed activities</string>
+
+    <string name="rate_activity">Rate this activity</string>
+    <string name="submit_rating">Submit</string>
+    <string name="rating_description">Tell us what you think(optional)</string>
+    <string name="previous_reviews">Previous reviews</string>
 </resources>

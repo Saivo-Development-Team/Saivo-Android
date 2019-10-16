@@ -13,7 +13,7 @@ class RecCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val info = itemView.recommendation_info_text!!
     private val users = itemView.notification_users
     private val title = itemView.notification_title
-    private val image = itemView.notification_image
+    private val image = itemView.rating_image
     private val stars = itemView.notification_stars
     private val status = itemView.status
     private val rating = itemView.notification_rating

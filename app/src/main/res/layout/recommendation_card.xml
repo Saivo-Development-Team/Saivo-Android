@@ -15,7 +15,7 @@
             android:layout_height="match_parent">
 
         <ImageView
-                android:id="@+id/notification_image"
+                android:id="@+id/rating_image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:contentDescription="@string/recommendation_image"
@@ -37,7 +37,7 @@
                 android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/notification_rating"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/notification_image"
+                app:layout_constraintStart_toEndOf="@id/rating_image"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
                 tools:targetApi="o"
@@ -51,7 +51,7 @@
                 android:textColor="@android:color/darker_gray"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/recommendation_category"
-                app:layout_constraintStart_toEndOf="@id/notification_image"
+                app:layout_constraintStart_toEndOf="@id/rating_image"
                 app:layout_constraintTop_toBottomOf="@id/notification_title"
                 tools:text="4,2" />
 
@@ -92,7 +92,7 @@
                 android:textColor="@android:color/darker_gray"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/status"
-                app:layout_constraintStart_toEndOf="@+id/notification_image"
+                app:layout_constraintStart_toEndOf="@+id/rating_image"
                 app:layout_constraintTop_toBottomOf="@+id/notification_rating"
                 tools:text="City -" />
 
@@ -128,7 +128,7 @@
                 android:textColor="@android:color/darker_gray"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/details"
-                app:layout_constraintStart_toEndOf="@id/notification_image"
+                app:layout_constraintStart_toEndOf="@id/rating_image"
                 app:layout_constraintTop_toBottomOf="@+id/recommendation_category"
                 tools:text="Visit -" />
 
@@ -141,7 +141,7 @@
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/notification_image"
+                app:layout_constraintStart_toEndOf="@+id/rating_image"
                 app:layout_constraintTop_toBottomOf="@+id/status"
                 tools:text="Has Buses" />
     </androidx.constraintlayout.widget.ConstraintLayout>

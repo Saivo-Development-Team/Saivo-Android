@@ -17,7 +17,7 @@ class NotifCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
     private val rating = itemView.notification_rating
     private val stars = itemView.notification_stars
     private val users = itemView.notification_users
-    private val image = itemView.notification_image
+    private val image = itemView.rating_image
 
     companion object {
         operator fun invoke(root: ViewGroup): RecyclerView.ViewHolder {
