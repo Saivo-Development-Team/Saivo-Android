@@ -5,12 +5,12 @@ import com.saivo.recommendo.data.model.infrastructure.Token
 
 interface IServerAuth {
     suspend fun init()
-    fun getClient(): Client
+    suspend fun getClient(): Client
     suspend fun saveClient(client: Client)
-    fun saveAccessToken(token: Token)
+    fun saveAccessToken(token: Token?)
     suspend fun initAuth()
-    suspend fun getAccessToken(): Token
-    suspend fun isValidToken(token: Token): Boolean
+    suspend fun getAccessToken(): Token?
+    suspend fun isValid(token: Token): Boolean
     suspend fun registerClient(secret: String): String
     fun addServerAuthListener(listener: IServerAuthListener)
 }
