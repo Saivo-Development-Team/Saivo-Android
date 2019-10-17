@@ -2,13 +2,10 @@ package com.saivo.recommendo.util.helpers
 
 import android.content.Context
 import android.util.Base64
+import android.util.Log
 import android.widget.Toast
-import androidx.room.TypeConverter
-import at.favre.lib.bytes.BinaryToTextEncoding
-import at.favre.lib.crypto.bcrypt.BCrypt
+import com.saivo.recommendo.data.objects.Response
 import kotlinx.coroutines.*
-import org.threeten.bp.OffsetDateTime
-import org.threeten.bp.format.DateTimeFormatter
 import java.util.*
 
 fun <T> lazyLoad(func: suspend CoroutineScope.() -> T): Lazy<Deferred<T>> {
@@ -16,6 +13,19 @@ fun <T> lazyLoad(func: suspend CoroutineScope.() -> T): Lazy<Deferred<T>> {
         GlobalScope.async(start = CoroutineStart.LAZY) {
             func.invoke(this)
         }
+    }
+}
+
+fun Throwable.logPrintStackTrace(caller: String? = "") {
+    Log.e("$this from [$caller]", "[${this.cause}]: ${this.message}")
+    this.printStackTrace()
+}
+
+fun Response.handleNullResponse(block: (Response.() -> Any)) {
+    runCatching {
+        block()
+    }.onFailure {
+        it.logPrintStackTrace("handleNullResponse / Your Network Call Failed")
     }
 }
 

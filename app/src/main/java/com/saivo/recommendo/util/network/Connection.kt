@@ -2,9 +2,6 @@ package com.saivo.recommendo.util.network
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.ConnectivityManager.NetworkCallback
-import android.net.Network
-import android.net.NetworkRequest
 import com.saivo.recommendo.util.exception.ConnectionOfflineException
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -13,8 +10,10 @@ class Connection(context: Context) : IConnection {
 
     private val applicationContext = context.applicationContext
     override fun intercept(chain: Interceptor.Chain): Response {
-        if (!gotInternet()) throw ConnectionOfflineException()
-        return chain.proceed(chain.request())
+        return runCatching {
+            if (!gotInternet()) throw ConnectionOfflineException()
+            chain.proceed(chain.request())
+        }.getOrThrow()
     }
 
     private fun gotInternet(): Boolean {
