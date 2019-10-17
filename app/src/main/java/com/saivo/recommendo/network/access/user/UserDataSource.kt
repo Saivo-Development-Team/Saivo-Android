@@ -1,6 +1,5 @@
 package com.saivo.recommendo.network.access.user
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.saivo.recommendo.data.model.infrastructure.UserData
@@ -8,9 +7,8 @@ import com.saivo.recommendo.data.objects.LoginCredentials
 import com.saivo.recommendo.data.objects.RegisterCredentials
 import com.saivo.recommendo.data.objects.Response
 import com.saivo.recommendo.network.resquest.IUserService
-import com.saivo.recommendo.util.exception.ConnectionOfflineException
-import retrofit2.HttpException
-import java.net.SocketTimeoutException
+import com.saivo.recommendo.util.helpers.handleNullResponse
+import com.saivo.recommendo.util.helpers.logPrintStackTrace
 
 class UserDataSource(
     private val userService: IUserService
@@ -21,72 +19,50 @@ class UserDataSource(
         get() = fetchedUserData
 
     override suspend fun getUserDataAsync(Id: String): Response {
-        var response = Response()
-        try {
-            response = userService.getUserDataAsync(Id).await()
-            if (response.data != null) {
-                fetchedUserData.postValue(response.getObjectFromData(UserData::class.java))
+        return runCatching {
+            userService.getUserDataAsync(Id).await()
+        }.onFailure {
+            it.logPrintStackTrace("getUserDataAsync(Id: String)")
+        }.onSuccess {
+            it.handleNullResponse {
+                fetchedUserData.postValue(this.getObject())
             }
-        } catch (e: HttpException) {
-            Log.e("Network", "[${e.cause}]: ${e.message!!}")
-        }
-        return response
+        }.getOrDefault(Response())
     }
 
     override suspend fun loginUserAsync(credentials: LoginCredentials): Response {
-        var response: Response
-        try {
-            response = userService.loginUserAsync(credentials).await()
-            if (response.data != null) {
-                fetchedUserData.postValue(response.getObjectFromData(UserData::class.java))
+        return runCatching {
+            userService.loginUserAsync(credentials).await()
+        }.onFailure {
+            it.logPrintStackTrace("loginUserAsync(credentials)")
+        }.onSuccess {
+            it.handleNullResponse {
+                fetchedUserData.postValue(this.getObject())
             }
-        } catch (e: Exception) {
-            Log.e("Network", "[${e.cause}]: ${e.message!!}")
-            when (e) {
-                is ConnectionOfflineException -> {
-                    Log.e("Connection", e.message!!)
-                    response = Response(
-                        error = "ConnectionOfflineException",
-                        status = "NETWORK_ERROR",
-                        message = "Check Internet access"
-                    )
-                    e.printStackTrace()
-                }
-                is SocketTimeoutException -> {
-                    Log.e("Timeout", e.message!!)
-                    response = Response(
-                        error = "SocketTimeoutException",
-                        status = "TIMEOUT_ERROR",
-                        message = "Server is down at the moment"
-                    )
-                }
-                else -> {
-                    Log.e("Error", e.message.toString())
-                    response = Response(
-                        error = e.cause.toString(),
-                        status = "UNKNOWN_ERROR",
-                        message = "Looks like we missed this error"
-                    )
-                }
-            }
-        }
-        return response
+        }.getOrDefault(Response())
     }
 
     override suspend fun registerUserAsync(credentials: RegisterCredentials): Response {
-        try {
-            return userService.registerUserAsync(credentials).await()
-        } catch (e: Exception) {
-            Log.e("Network", "[${e.cause}]: ${e.message!!}")
-        }
-        return Response()
+        return runCatching {
+            userService.registerUserAsync(credentials).await()
+        }.onFailure {
+            it.logPrintStackTrace("registerUserAsync(credentials: RegisterCredentials)")
+        }.getOrDefault(Response())
     }
 
     override suspend fun restUserPassword(password: String, email: String) {
-        userService.restUserPasswordAsync(password, email).await()
+        runCatching {
+            userService.restUserPasswordAsync(password, email).await()
+        }.onFailure {
+            it.logPrintStackTrace("restUserPassword(password: String, email: String)")
+        }.getOrDefault(Response())
     }
 
     override suspend fun getOTPFromServer(number: String, email: String): Response {
-        return userService.getOTPFromServerAsync(number, email).await()
+        return runCatching {
+            userService.getOTPFromServerAsync(number, email).await()
+        }.onFailure {
+            it.logPrintStackTrace("getOTPFromServerAsync(number, email)")
+        }.getOrDefault(Response())
     }
 }

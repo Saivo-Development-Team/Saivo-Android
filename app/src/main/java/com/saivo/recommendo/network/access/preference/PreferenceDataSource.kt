@@ -8,15 +8,24 @@ class PreferenceDataSource(
 ) : IPreferenceDataSource {
     @Suppress("UNCHECKED_CAST")
     override suspend fun getPreferencesAsync(email: String): ArrayList<Preference> {
-        return preferenceService.getPreferencesAsync(email).await().data as ArrayList<Preference>
+        return runCatching {
+            preferenceService
+                .getPreferencesAsync(email).await()
+                .getList<ArrayList<Preference>, Preference>()
+        }.getOrDefault(arrayListOf())
     }
 
     override suspend fun getPreferenceAsync(Id: String): Preference? {
-        return preferenceService.getPreferenceAsync(Id).await()
-            .getObjectFromData(Preference::class.java)
+        return runCatching {
+            preferenceService
+                .getPreferenceAsync(Id).await()
+                .getObject<Preference>()
+        }.getOrNull()
     }
 
     override suspend fun savePreference(email: String, preference: Preference): String {
-        return preferenceService.savePreferenceAsync(email, preference).await().status
+        return runCatching {
+            preferenceService.savePreferenceAsync(email, preference).await().getObject<String>()
+        }.getOrDefault("")
     }
 }
