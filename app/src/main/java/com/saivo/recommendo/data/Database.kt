@@ -25,7 +25,7 @@ import androidx.room.Database as RDatabase
         User::class, Rating::class, Recommendation::class,
         Preference::class, Client::class, Token::class
     ],
-    version = 15
+    version = 16
 )
 @TypeConverters(Converters::class)
 abstract class Database : RoomDatabase() {
