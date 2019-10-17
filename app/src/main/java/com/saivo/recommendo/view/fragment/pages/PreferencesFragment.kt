@@ -5,15 +5,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.saivo.recommendo.R
+import com.saivo.recommendo.data.model.domain.Preference
 import com.saivo.recommendo.view.fragment.dialog.IPreferenceDialogListener
 import com.saivo.recommendo.view.fragment.dialog.PreferenceDialogFragment
 import com.saivo.recommendo.view.objects.RecyclerAdapter
 import com.saivo.recommendo.view.objects.preferences.PreCard
+import com.saivo.recommendo.view.viewmodel.ViewModelFactory
+import com.saivo.recommendo.view.viewmodel.preference.IPreferenceViewModel
+import com.saivo.recommendo.view.viewmodel.preference.PreferenceViewModel
 import kotlinx.android.synthetic.main.fragment_preferences.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
-class PreferencesFragment : Fragment(), IPreferenceDialogListener {
+class PreferencesFragment : Fragment(), KodeinAware, IPreferenceDialogListener {
+    override val kodein: Kodein by closestKodein()
+
+    private lateinit var preferenceViewModel: IPreferenceViewModel
+    private val viewModelFactory: ViewModelFactory by instance()
     private val preferenceDialogFragment = PreferenceDialogFragment()
     private val recyclerAdapter = RecyclerAdapter(PreCard::class.java)
     private val data = arrayListOf<PreCard>()
@@ -28,11 +44,15 @@ class PreferencesFragment : Fragment(), IPreferenceDialogListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        preferenceViewModel =
+            ViewModelProvider(this, viewModelFactory).get(PreferenceViewModel::class.java)
+        loadPreferences()
         preference_recycler_view.apply {
             layoutManager = LinearLayoutManager(this@PreferencesFragment.context)
             adapter = recyclerAdapter
         }
-        setRecyclerItems()
+
+        recyclerAdapter.addToListItems(data)
         floating_action_button.setOnClickListener {
             preferenceDialogFragment.setPreferenceDialogListener(this)
             preferenceDialogFragment.show(
@@ -42,32 +62,17 @@ class PreferencesFragment : Fragment(), IPreferenceDialogListener {
         }
     }
 
-    private fun setRecyclerItems() {
-        data.add(
-            PreCard(
-                likes = "Coding",
-                dislikes = "Driving",
-                category = "Activity",
-                description = "In my Free Time I code, but I hate it when I have to Drive"
+    private fun loadPreferences() = CoroutineScope(IO).launch {
+        preferenceViewModel.getPreference().forEach {
+            data.add(
+                PreCard(
+                    likes = it.likes,
+                    dislikes = it.dislikes,
+                    category = it.category,
+                    description = it.description
+                )
             )
-        )
-        data.add(
-            PreCard(
-                likes = "Pizza",
-                dislikes = "Green Beans",
-                category = "Food",
-                description = "So am a Foodie, and Love to it all kings of things, just not Green Beans"
-            )
-        )
-        data.add(
-            PreCard(
-                likes = "12345678901234567",
-                dislikes = "12345678901234567",
-                category = "Numbers",
-                description = "So am a Number guys, and Love to tyr new things with numbers, yet I still fails maths LOL"
-            )
-        )
-        recyclerAdapter.addToListItems(data)
+        }
     }
 
     private fun addCardData(card: PreCard): ArrayList<PreCard> {
@@ -75,8 +80,23 @@ class PreferencesFragment : Fragment(), IPreferenceDialogListener {
     }
 
     override fun onPreferenceSaved(card: PreCard) {
+        CoroutineScope(IO).launch {
+            addPreferenceFromView(card)
+        }
         recyclerAdapter.addToListItems(addCardData(card))
         recyclerAdapter.notifyDataSetChanged()
+    }
+
+    private suspend fun addPreferenceFromView(card: PreCard) {
+        preferenceViewModel.addPreference(
+            Preference(
+                id = "",
+                likes = card.likes,
+                dislikes = card.dislikes,
+                category = card.category,
+                description = card.description
+            )
+        )
     }
 
 }

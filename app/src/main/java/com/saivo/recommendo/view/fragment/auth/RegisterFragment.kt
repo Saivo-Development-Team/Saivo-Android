@@ -7,12 +7,11 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.lifecycle.ViewModelProvider
 import com.saivo.recommendo.R
-import com.saivo.recommendo.network.access.IUserDataSource
+import com.saivo.recommendo.network.access.user.IUserDataSource
 import com.saivo.recommendo.util.helpers.*
-import com.saivo.recommendo.util.helpers.REGISTRATION_SUCCESSFUL
 import com.saivo.recommendo.view.fragment.CoroutineFragment
-import com.saivo.recommendo.view.viewmodel.auth.AuthViewModel
 import com.saivo.recommendo.view.viewmodel.ViewModelFactory
+import com.saivo.recommendo.view.viewmodel.auth.AuthViewModel
 import com.saivo.recommendo.view.viewmodel.auth.IAuthRegisterUser
 import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.coroutines.launch
@@ -87,7 +86,7 @@ class RegisterFragment : CoroutineFragment(), KodeinAware {
                 with(userDataSource) { registerUserAsync(authViewModel.getRegisterCredentials()) }.apply {
                     when (status) {
                         REGISTRATION_SUCCESSFUL -> {
-                            with(userDataSource) { getUserDataAsync(data as String) }
+                            with(userDataSource) { getUserDataAsync(getObject()) }
                             authViewModel.userRegistered(view)
                         }
                         else -> toastMessage(this@RegisterFragment.context, message)

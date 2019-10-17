@@ -1,6 +1,5 @@
 package com.saivo.recommendo.view.fragment.dialog
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -53,6 +52,9 @@ class PreferenceDialogFragment : BottomSheetDialogFragment() {
                             preferenceLikeText.text = this[0]
                             if (size > 1 || size < 2) preferenceDislikeText.text = this[1]
                         }
+                    } else {
+                        preferenceLikeText.text = it
+                        preferenceDislikeText.text = null
                     }
                 }
             })
@@ -83,6 +85,16 @@ class PreferenceDialogFragment : BottomSheetDialogFragment() {
         preferenceLikeText = view.findViewById(R.id.preference_like_text)
         preferenceDislikeText = view.findViewById(R.id.preference_dislike_text)
         preferenceDescriptionText = view.findViewById(R.id.preference_description_text)
+
+        preferenceLikeText.apply {
+            hint = resources.getString(R.string.what_you_like)
+            setHintTextColor(resources.getColor(R.color.lightGray, null))
+        }
+
+        preferenceDislikeText.apply {
+            hint = resources.getString(R.string.and_dislike)
+            setHintTextColor(resources.getColor(R.color.lightGray, null))
+        }
     }
 
     fun setPreferenceDialogListener(listener: IPreferenceDialogListener) {

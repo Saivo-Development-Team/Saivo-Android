@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.saivo.recommendo.R
-import com.saivo.recommendo.network.access.IUserDataSource
+import com.saivo.recommendo.network.access.user.IUserDataSource
 import com.saivo.recommendo.util.helpers.toastMessage
 import com.saivo.recommendo.view.fragment.CoroutineFragment
 import com.saivo.recommendo.view.viewmodel.ViewModelFactory
@@ -117,7 +117,7 @@ class ResetPasswordFragment : CoroutineFragment(), KodeinAware {
 
     private suspend fun sendSMS(number: String, email: String): String = withContext(IO) {
         with(userDataSource.getOTPFromServer(number = number, email = email)) {
-            if (!error.isNotBlank()) return@withContext (data as String)
+            if (!error.isNotBlank()) return@withContext (getObject<String>())
             else throw Exception(message)
         }
     }

@@ -1,6 +1,5 @@
 package com.saivo.recommendo.view.fragment.pages
 
-
 import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,14 +10,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.saivo.recommendo.R
-import com.saivo.recommendo.provider.ILocationProvider
+import com.saivo.recommendo.provider.location.ILocationProvider
+import com.saivo.recommendo.provider.location.LocationObserver
 import com.saivo.recommendo.util.helpers.toastMessage
 import com.saivo.recommendo.view.fragment.CoroutineFragment
 import com.saivo.recommendo.view.viewmodel.ViewModelFactory
@@ -34,14 +34,14 @@ import org.kodein.di.generic.instance
 /**
  * A simple [Fragment] subclass.
  */
-class MapFragment : CoroutineFragment(), KodeinAware, OnMapReadyCallback {
+class MapFragment : CoroutineFragment(), KodeinAware {
     override val kodein: Kodein by closestKodein()
-    private lateinit var userViewModel: IUserViewModel
     private val deviceLocation: LiveData<Location>
         get() = _deviceLocation
+    private lateinit var userViewModel: IUserViewModel
     private var _deviceLocation = MutableLiveData<Location>()
-    private val locationProvider: ILocationProvider by instance()
     private val viewModelFactory: ViewModelFactory by instance()
+    private val locationProvider: ILocationProvider by instance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,14 +51,12 @@ class MapFragment : CoroutineFragment(), KodeinAware, OnMapReadyCallback {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        LocationObserver(
+            this, locationProvider.getLocationProviderClient(), locationCallBack()
+        )
         userViewModel = ViewModelProvider(this, viewModelFactory).get(UserViewModel::class.java)
 
         launch {
-            locationProvider.getDeviceLocation().apply {
-                _deviceLocation.postValue(this)
-                toastMessage(this@MapFragment.requireContext(), this.toString())
-            }
             userViewModel.userData.await().observe(
                 this@MapFragment, Observer {
                     firstname_text_view.text = it.firstname
@@ -68,16 +66,31 @@ class MapFragment : CoroutineFragment(), KodeinAware, OnMapReadyCallback {
         }
 
         val map = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        map.getMapAsync(this)
+        map.getMapAsync { googleMap ->
+            deviceLocation.observe(this, Observer {
+                if (it == null) return@Observer
+                toastMessage(
+                    this.requireContext(),
+                    "Latitude[${it.latitude}]\nLongitude[${it.longitude}]"
+                )
+                val location = LatLng(it.latitude, it.longitude)
+                googleMap.addMarker(MarkerOptions().position(location))
+                googleMap.moveCamera(CameraUpdateFactory.newLatLng(location))
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15F))
+            })
+
+            googleMap.animateCamera(CameraUpdateFactory.zoomIn())
+        }
         super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        deviceLocation.observe(this, Observer {
-            val location = LatLng(it.latitude, it.longitude)
-            googleMap.addMarker(MarkerOptions().position(location))
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(location))
-        })
+    private fun locationCallBack(): LocationCallback {
+        return object : LocationCallback() {
+            override fun onLocationResult(p0: LocationResult?) {
+                super.onLocationResult(p0)
+                _deviceLocation.postValue(p0?.lastLocation)
+            }
+        }
     }
 
 }
