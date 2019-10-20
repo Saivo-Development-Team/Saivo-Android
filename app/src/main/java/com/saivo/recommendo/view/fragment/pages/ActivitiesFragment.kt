@@ -2,17 +2,16 @@ package com.saivo.recommendo.view.fragment.pages
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.saivo.recommendo.R
-import com.saivo.recommendo.view.objects.RecyclerAdapter
-import com.saivo.recommendo.view.objects.recommendations.RecCard
+import com.saivo.recommendo.view.objects.recommendations.RecommendationCard
+import com.saivo.recommendo.view.objects.recommendations.RecommendationViewHolder
 import kotlinx.android.synthetic.main.fragment_activities.*
 
 /**
@@ -20,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_activities.*
  */
 class ActivitiesFragment : Fragment() {
 
-    private val recyclerAdapter = RecyclerAdapter(RecCard::class.java)
+    private val recyclerAdapter = RecommendationViewHolder.adapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +34,7 @@ class ActivitiesFragment : Fragment() {
             layoutManager = LinearLayoutManager(this@ActivitiesFragment.context)
             adapter = recyclerAdapter
         }
-        recyclerAdapter.addToListItems(getData())
+        recyclerAdapter.submitList(getData())
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -54,10 +53,10 @@ class ActivitiesFragment : Fragment() {
             })
     }
 
-    private fun getData(): ArrayList<RecCard> {
-        val data = arrayListOf<RecCard>()
+    private fun getData(): ArrayList<RecommendationCard> {
+        val data = arrayListOf<RecommendationCard>()
         data.add(
-            RecCard(
+            RecommendationCard(
                 rating = "4,5",
                 image = "https://gcs.thesouthafrican.com/2019/08/91fab20a-worlds-friendliest-cities-cape-town-1200x858.jpg",
                 stars = 4.5,
@@ -71,7 +70,7 @@ class ActivitiesFragment : Fragment() {
             )
         )
         data.add(
-            RecCard(
+            RecommendationCard(
                 rating = "3,2",
                 image = "https://cdn.britannica.com/49/100349-050-24E63356/view-central-business-district-Johannesburg-South-Africa.jpg",
                 stars = 3.2,
