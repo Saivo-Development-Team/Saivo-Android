@@ -66,137 +66,140 @@
   </LinearLayout>
 
 
-  <LinearLayout
-      android:id="@+id/editDetails"
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/accountDetails">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:id="@+id/editDetails"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accountDetails">
 
 
-      <TextView
-          android:id="@+id/reset_password_hints"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="8dp"
-          android:layout_marginTop="8dp"
-          android:layout_marginRight="8dp"
-          android:layout_marginBottom="8dp"
-          android:ems="10"
-          android:text="@string/update_your_email_and_phone_number"
-          android:textAlignment="center"
-          android:textSize="18sp"
-          app:layout_constraintBottom_toTopOf="@+id/reset_email_editText"
-          app:layout_constraintLeft_toLeftOf="@+id/GuidelineLeft"
-          app:layout_constraintRight_toRightOf="@+id/GuidelineRight"
-          app:layout_constraintTop_toTopOf="parent" />
+      <androidx.constraintlayout.widget.ConstraintLayout
 
-      <EditText
-          android:id="@+id/reset_email_editText"
-          android:layout_width="0dp"
-          android:layout_height="50dp"
-          android:layout_marginLeft="8dp"
-          android:layout_marginTop="8dp"
-          android:layout_marginRight="8dp"
-          android:layout_marginBottom="8dp"
-          android:autofillHints="false"
-          android:background="@drawable/edit_text_background"
-          android:drawableEnd="@drawable/ic_email"
-          android:ems="10"
-          android:hint="@string/email"
-          android:inputType="textEmailAddress"
-          android:paddingStart="10dp"
-          android:paddingEnd="10dp"
-          app:layout_constraintBottom_toTopOf="@+id/reset_phone_number_editText"
-          app:layout_constraintLeft_toLeftOf="@+id/GuidelineLeft"
-          app:layout_constraintRight_toRightOf="@+id/GuidelineRight"
-          app:layout_constraintTop_toBottomOf="@+id/reset_password_hints"
-          tools:targetApi="o" />
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
 
-      <EditText
-          android:id="@+id/reset_phone_number_editText"
-          android:layout_width="0dp"
-          android:layout_height="50dp"
-          android:layout_marginLeft="8dp"
-          android:layout_marginTop="8dp"
-          android:layout_marginRight="8dp"
-          android:layout_marginBottom="8dp"
-          android:autofillHints="false"
-          android:background="@drawable/edit_text_background"
-          android:drawableEnd="@drawable/ic_local_phone"
-          android:ems="10"
-          android:hint="@string/phone_number"
-          android:inputType="phone"
-          android:maxLength="15"
-          android:paddingStart="10dp"
-          android:paddingEnd="10dp"
-          app:layout_constraintBottom_toTopOf="@+id/reset_password_editText"
-          app:layout_constraintLeft_toLeftOf="@+id/GuidelineLeft"
-          app:layout_constraintRight_toRightOf="@+id/GuidelineRight"
-          app:layout_constraintTop_toBottomOf="@+id/reset_email_editText"
-          tools:targetApi="o" />
 
-      <EditText
-          android:id="@+id/reset_password_editText"
-          android:layout_width="0dp"
-          android:layout_height="50dp"
-          android:layout_marginLeft="8dp"
-          android:layout_marginTop="8dp"
-          android:layout_marginRight="8dp"
-          android:layout_marginBottom="8dp"
-          android:autofillHints="false"
-          android:background="@drawable/edit_text_background"
-          android:drawableEnd="@drawable/ic_lock"
-          android:ems="10"
-          android:hint="@string/new_password"
-          android:inputType="textPassword"
-          android:paddingStart="10dp"
-          android:paddingEnd="10dp"
-          android:visibility="gone"
-          app:layout_constraintBottom_toTopOf="@+id/reset_confirm_button"
-          app:layout_constraintLeft_toLeftOf="@+id/GuidelineLeft"
-          app:layout_constraintRight_toRightOf="@+id/GuidelineRight"
-          app:layout_constraintTop_toBottomOf="@+id/reset_phone_number_editText"
-          tools:targetApi="o" />
+        <TextView
+            android:id="@+id/reset_password_hints"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:text="@string/update_your_email_and_phone_number"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/reset_email_editText"
+            app:layout_constraintLeft_toLeftOf="@+id/GuidelineLeft"
+            app:layout_constraintRight_toRightOf="@+id/GuidelineRight"
+            app:layout_constraintTop_toTopOf="parent" />
 
-      <Button
-          android:id="@+id/reset_confirm_button"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="8dp"
-          android:layout_marginTop="8dp"
-          android:layout_marginRight="8dp"
-          android:layout_marginBottom="8dp"
-          android:background="@drawable/button_background"
-          android:ems="10"
-          android:text="@string/save"
-          android:textAllCaps="false"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintLeft_toLeftOf="@+id/GuidelineLeft"
-          app:layout_constraintRight_toRightOf="@+id/GuidelineRight"
-          app:layout_constraintTop_toBottomOf="@+id/reset_password_editText" />
+        <EditText
+            android:id="@+id/reset_email_editText"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:autofillHints="false"
+            android:background="@drawable/edit_text_background"
+            android:drawableEnd="@drawable/ic_email"
+            android:ems="10"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/reset_phone_number_editText"
+            app:layout_constraintLeft_toLeftOf="@+id/GuidelineLeft"
+            app:layout_constraintRight_toRightOf="@+id/GuidelineRight"
+            app:layout_constraintTop_toBottomOf="@+id/reset_password_hints"
+            tools:targetApi="o" />
 
-      <androidx.constraintlayout.widget.Guideline
-          android:id="@+id/GuidelineLeft"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:orientation="vertical"
-          app:layout_constraintGuide_begin="50dp" />
+        <EditText
+            android:id="@+id/reset_phone_number_editText"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:autofillHints="false"
+            android:background="@drawable/edit_text_background"
+            android:drawableEnd="@drawable/ic_local_phone"
+            android:ems="10"
+            android:hint="@string/phone_number"
+            android:inputType="phone"
+            android:maxLength="15"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/reset_password_editText"
+            app:layout_constraintLeft_toLeftOf="@+id/GuidelineLeft"
+            app:layout_constraintRight_toRightOf="@+id/GuidelineRight"
+            app:layout_constraintTop_toBottomOf="@+id/reset_email_editText"
+            tools:targetApi="o" />
 
-      <androidx.constraintlayout.widget.Guideline
-          android:id="@+id/GuidelineRight"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:orientation="vertical"
-          app:layout_constraintGuide_end="50dp" />
+        <EditText
+            android:id="@+id/reset_password_editText"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:autofillHints="false"
+            android:background="@drawable/edit_text_background"
+            android:drawableEnd="@drawable/ic_lock"
+            android:ems="10"
+            android:hint="@string/new_password"
+            android:inputType="textPassword"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/reset_confirm_button"
+            app:layout_constraintLeft_toLeftOf="@+id/GuidelineLeft"
+            app:layout_constraintRight_toRightOf="@+id/GuidelineRight"
+            app:layout_constraintTop_toBottomOf="@+id/reset_phone_number_editText"
+            tools:targetApi="o" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-  </LinearLayout>
+        <Button
+            android:id="@+id/reset_confirm_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_background"
+            android:ems="10"
+            android:text="@string/save"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/GuidelineLeft"
+            app:layout_constraintRight_toRightOf="@+id/GuidelineRight"
+            app:layout_constraintTop_toBottomOf="@+id/reset_password_editText" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/GuidelineLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="50dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/GuidelineRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="50dp" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 
 
