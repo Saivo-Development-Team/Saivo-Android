@@ -14,9 +14,10 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.saivo.recommendo.R
 import com.saivo.recommendo.view.fragment.CoroutineFragment
+import com.saivo.recommendo.view.objects.AlertDialog
+import com.saivo.recommendo.view.viewmodel.ViewModelFactory
 import com.saivo.recommendo.view.viewmodel.user.IUserViewModel
 import com.saivo.recommendo.view.viewmodel.user.UserViewModel
-import com.saivo.recommendo.view.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.layout_profile_banner.*
 import kotlinx.coroutines.launch
@@ -54,8 +55,11 @@ class DashboardFragment : CoroutineFragment(), KodeinAware {
         launch {
             userViewModel.userData.await().observe(
                 this@DashboardFragment, Observer {
-                    fullname.text = "${it.firstname} ${it.lastname}"
-                    email_text_view.text = it.email
+                    with(it) {
+                        fullname.text = "$firstname $lastname"
+                        email_text_view.text = email
+                        if (!enabled) showVerifyAccountDialog()
+                    }
                 }
             )
         }
@@ -64,6 +68,25 @@ class DashboardFragment : CoroutineFragment(), KodeinAware {
         setupMaterialToolbar()
         setupWithNavController(navigation_view, dashboardNavController)
         setupWithNavController(materialToolbar, dashboardNavController, drawerLayout)
+    }
+
+    private fun showVerifyAccountDialog() {
+        AlertDialog.setDialog(appCompatActivity).apply {
+            title.text = getString(R.string.welcome_verify)
+            message.text = "You have just registered\nPlease verify your Account Details"
+            button.apply {
+                text = getString(R.string.verify_account_text)
+                visibility = View.VISIBLE
+                setOnClickListener {
+                    dialog.dismiss()
+                }
+            }
+            close.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            dialog.show()
+        }
     }
 
     private fun setupMaterialToolbar() {

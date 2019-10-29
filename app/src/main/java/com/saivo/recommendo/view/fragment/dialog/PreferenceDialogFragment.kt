@@ -8,7 +8,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textview.MaterialTextView
 import com.saivo.recommendo.R
 import com.saivo.recommendo.util.helpers.textWatcher
-import com.saivo.recommendo.view.objects.preferences.PreCard
+import com.saivo.recommendo.view.objects.preferences.PreferenceCard
 import kotlinx.android.synthetic.main.fragment_preference_dialog.*
 
 /**
@@ -68,7 +68,7 @@ class PreferenceDialogFragment : BottomSheetDialogFragment() {
 
         preference_save_button.setOnClickListener {
             preferenceDialogListener?.onPreferenceSaved(
-                PreCard(
+                PreferenceCard(
                     likes = preferenceLikeText.text.toString(),
                     dislikes = preferenceDislikeText.text.toString(),
                     category = categoryText.text.toString(),

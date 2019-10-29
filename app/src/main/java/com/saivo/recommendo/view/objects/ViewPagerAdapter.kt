@@ -23,6 +23,7 @@ class ViewPagerAdapter(fm: FragmentManager, behavior: Int) : FragmentPagerAdapte
             else -> ""
         }
     }
+
     override fun getCount(): Int {
         return totalItems
     }
